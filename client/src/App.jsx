@@ -1,12 +1,10 @@
 import React from "react";
 import Test from "./components/Test/Test";
-import piazza from "./piazza.jpeg";
+import Container from "./components/Container/Container";
 
 const App = () => (
   <div>
-    <h1 className="wow">Welcome to React!</h1>
-    <Test />
-    <img src={piazza} alt="" />
+    <Container />
   </div>
 );
 

@@ -1,4 +1,13 @@
 body {
-  background-color: aqua;
+  background-color: rgb(25, 25, 25);
   margin: 0 auto;
+  /* color: rgb(255, 252, 238); */
+}
+
+.container {
+  height: 80vh;
+  width: 60vw;
+  border: solid white 1px;
+  margin-left: 20vw;
+  margin-top: 10vh;
 }
