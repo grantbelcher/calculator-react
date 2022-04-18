@@ -1,7 +1,7 @@
-body {
+/* body {
   background-color: rgb(25, 25, 25);
   margin: 0 auto;
-  /* color: rgb(255, 252, 238); */
+  color: rgb(255, 252, 238);
 }
 
 .container {
@@ -23,7 +23,7 @@ body {
   grid-template-rows: 40px 40px 40px 40px;
   column-gap: 5px;
   row-gap: 5px;
-  /* grid-auto-rows: 50px; */
+  grid-auto-rows: 50px;
 }
 
 .grid-center {
@@ -32,20 +32,72 @@ body {
   grid-template-rows: 40px 40px 40px 40px;
   row-gap: 5px;
   column-gap: 5px;
+} */
+
+/* .buttons-right {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  background-color: aquamarine;
+} */
+
+/* .right-row-1 {
+  background-color: blueviolet;
+  display: flex;
+} */
+/* .right-row-2 {
+  background-color: azure;
+  display: flex;
+} */
+
+body {
+  background-color: rgb(25, 25, 25);
+  margin: 0 auto;
+  color: rgb(255, 252, 238);
 }
 
-.grid-right {
-  display: grid;
-  grid-template-columns: 50px 50px;
-  grid-template-rows: 40px 40px;
-  /* grid-auto-columns: 100px; */
-  row-gap: 5px;
-  column-gap: 5px;
-}
+@media screen and (max-width: 600px) {
+  .container {
+    height: 100vh;
+    width: 100vw;
+    border: solid white 1px;
+    background-color: lightblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
 
-.button {
-  /* height: 50px;
-  width: 50px; */
-  background-color: salmon;
-  border: solid black 1px;
+  .bottom-section {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .trig-functions {
+    display: grid;
+    grid-template-columns: 50px 50px 50px;
+    grid-template-rows: 40px 40px 40px 40px;
+    column-gap: 5px;
+    row-gap: 5px;
+    grid-auto-rows: 50px;
+  }
+
+  .grid-center {
+    display: grid;
+    grid-template-columns: 50px 50px 50px 50px;
+    grid-template-rows: 40px 40px 40px 40px;
+    row-gap: 5px;
+    column-gap: 5px;
+  }
+  .buttons-right {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    background-color: aquamarine;
+  }
+  .button {
+    height: 40px;
+    width: 50px;
+    background-color: salmon;
+    border: solid black 1px;
+  }
 }
