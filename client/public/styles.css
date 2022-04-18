@@ -98,8 +98,31 @@ body {
     display: flex;
     flex-direction: column;
     width: 20%;
-    /* background-color: aquamarine; */
+    background-color: aquamarine;
   }
+
+  .right-row {
+    width: 100%;
+    height: 23%;
+    display: flex;
+    /* border: solid 1px black; */
+    margin-bottom: 3%;
+  }
+
+  .top > div {
+    border: 1px solid black;
+    width: 45%;
+  }
+  /* ADD RIGHT MARGIN ONLY TO FIRST BUTTON IN ROW */
+  .top > div:first-of-type {
+    margin-right: 5%;
+  }
+
+  .bottom > div {
+    border: 1px solid black;
+    width: 100%;
+  }
+
   .button {
     /* height: 40px;
     width: 50px; */
