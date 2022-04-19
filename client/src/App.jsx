@@ -7,6 +7,7 @@ import Options from "./components/Options";
 
 const App = () => (
   <div className="container">
+    <div className="top-section"></div>
     <Options />
     <div className="bottom-section">
       <Trig />
