@@ -1,4 +1,5 @@
 import React from "react";
+import Equation from "./Equation";
 
 let equation = [
   "4+5=9",
@@ -15,7 +16,7 @@ let equation = [
 
 function Equations() {
   const elements = equation.map((equation, i) => {
-    return <input className="equation"></input>;
+    return <Equation />;
   });
 
   return <div className="equation-container">{elements}</div>;
