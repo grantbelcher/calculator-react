@@ -4,11 +4,11 @@ import Trig from "./components/Trig/Trig";
 import GridCenter from "./components/GridCenter";
 import GridRight from "./components/GridRight";
 import Options from "./components/Options";
-import Expressions from "./components/Expressions";
+import Equations from "./components/Equations";
 
 const App = () => (
   <div className="container">
-    <Expressions />
+    <Equations />
     <Options />
     <div className="bottom-section">
       <Trig />

@@ -29,11 +29,15 @@ body {
   }
 
   .equation-container {
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column-reverse;
   }
 
   .equation {
     border: solid black 1px;
     min-height: 56px;
+    width: 100%;
     font-size: 1.5rem;
     display: flex;
     flex-direction: column;
