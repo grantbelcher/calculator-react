@@ -13,8 +13,9 @@ function Equation() {
     <div className="equation">
       {/* <span> */}
       <input type="text" className="expression" />
-      {/* </span> */}
-      <span className="output">output</span>
+      <div className="output-container">
+        <span className="output">output</span>
+      </div>
     </div>
   );
 }
