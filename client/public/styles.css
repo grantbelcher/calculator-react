@@ -29,20 +29,34 @@ body {
   }
 
   .equation-container {
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     display: flex;
     flex-direction: column-reverse;
+    overflow-x: hidden;
   }
 
   .equation {
     border: solid black 1px;
-    min-height: 56px;
+    min-height: 50px;
     width: 100%;
     font-size: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 1em;
+  }
+
+  input.expression {
+    display: inline;
+    background-color: palegreen;
+    border: none;
+    min-height: 50px;
+    width: 70%;
+    font-size: 1.5rem;
+    font-family: sans-serif;
+  }
+
+  .output {
+    width: 70%;
+    font-size: 1.5rem;
+    font-family: sans-serif;
+    text-align: right;
   }
 
   .bottom-section {

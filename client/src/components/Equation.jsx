@@ -11,8 +11,10 @@ import React from "react";
 function Equation() {
   return (
     <div className="equation">
-      <span className="expression" />
-      <span className="output" />
+      {/* <span> */}
+      <input type="text" className="expression" />
+      {/* </span> */}
+      <span className="output">output</span>
     </div>
   );
 }
