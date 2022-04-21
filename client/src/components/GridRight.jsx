@@ -5,7 +5,7 @@ function GridRight() {
     <div className="buttons-right">
       <div className="right-row top">
         <div className="button">
-          <i class="material-icons">percent</i>
+          <i className="material-icons">percent</i>
         </div>
         <div className="button">
           <sup>a</sup>/<sub>b</sub>
@@ -13,15 +13,15 @@ function GridRight() {
       </div>
       <div className="right-row top">
         <div className="button">
-          <i class="material-icons">arrow_back</i>
+          <i className="material-icons">arrow_back</i>
         </div>
         <div className="button">
-          <i class="material-icons">arrow_forward</i>
+          <i className="material-icons">arrow_forward</i>
         </div>
       </div>
       <div className="right-row bottom">
         <div className="button">
-          <i class="material-icons">backspace</i>
+          <i className="material-icons">backspace</i>
         </div>
       </div>
       <div className="right-row bottom">
