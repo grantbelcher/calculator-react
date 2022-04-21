@@ -9,11 +9,13 @@ import Equations from "./components/Equations";
 const App = () => (
   <div className="container">
     <Equations />
-    <Options />
-    <div className="bottom-section">
-      <Trig />
-      <GridCenter />
-      <GridRight />
+    <div className="calculator-api">
+      <Options />
+      <div className="bottom-section">
+        <Trig />
+        <GridCenter />
+        <GridRight />
+      </div>
     </div>
   </div>
 );

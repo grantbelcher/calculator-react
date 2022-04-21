@@ -4,10 +4,29 @@ body {
   color: rgb(255, 252, 238);
 }
 
+@media screen and (min-width: 600px) {
+  #root {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .container {
+    background-color: blue;
+  }
+  .container {
+    height: 700px;
+    width: 550px;
+    border: solid white 1px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .options {
     background-color: white;
-    height: 6.25%;
+    height: 15%;
     width: 100%;
   }
 
@@ -73,12 +92,17 @@ body {
     text-align: right;
   }
 
+  .calculator-api {
+    height: 25%;
+    min-height: 200px;
+  }
+
   .bottom-section {
     display: flex;
     flex-direction: row;
     background-color: pink;
     padding: 4px;
-    height: 25%;
+    height: 75%;
     justify-content: space-between;
   }
 
