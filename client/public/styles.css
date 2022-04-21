@@ -138,5 +138,7 @@ body {
     width: 50px; */
     background-color: salmon;
     border: solid black 1px;
+    padding-top: 20%;
+    text-align: center;
   }
 }
