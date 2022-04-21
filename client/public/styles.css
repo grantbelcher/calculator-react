@@ -37,7 +37,6 @@ body {
     /* background-color: lightblue; */
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
   }
 
   .top-section {
@@ -48,9 +47,10 @@ body {
   }
 
   .equation-container {
-    /* overflow-y: scroll; */
     display: flex;
     flex-direction: column-reverse;
+    min-height: 50px;
+    /* THIS PREVENTS WIERD VERTICAL SCROLLING? */
     overflow-x: hidden;
   }
 
@@ -95,6 +95,9 @@ body {
   .calculator-api {
     height: 25%;
     min-height: 200px;
+
+    /* HIGHLIGHTS WIERD PADDING FROM CALC API */
+    background-color: palegoldenrod;
   }
 
   .bottom-section {
