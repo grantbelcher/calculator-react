@@ -4,18 +4,28 @@ function GridRight() {
   return (
     <div className="buttons-right">
       <div className="right-row top">
-        <div className="button">%</div>
-        <div className="button">a/b</div>
+        <div className="button">
+          <i class="material-icons">percent</i>
+        </div>
+        <div className="button">
+          <sup>a</sup>/<sub>b</sub>
+        </div>
       </div>
       <div className="right-row top">
-        <div className="button">.</div>
-        <div className="button">.</div>
+        <div className="button">
+          <i class="material-icons">arrow_back</i>
+        </div>
+        <div className="button">
+          <i class="material-icons">arrow_forward</i>
+        </div>
       </div>
       <div className="right-row bottom">
-        <div className="button">#</div>
+        <div className="button">
+          <i class="material-icons">backspace</i>
+        </div>
       </div>
       <div className="right-row bottom">
-        <div className="button">#</div>
+        <div className="button">&#11152;</div>
       </div>
     </div>
   );

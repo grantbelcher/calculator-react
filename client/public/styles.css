@@ -168,4 +168,7 @@ body {
     padding-top: 20%;
     text-align: center;
   }
+  .right-row > .button {
+    padding-top: 0.3em;
+  }
 }
