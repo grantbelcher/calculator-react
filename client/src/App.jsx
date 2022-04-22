@@ -44,55 +44,22 @@ const App = () => {
   };
 
   const keyPressHandler = (value) => {
-    // console.log(
-    //   prevEquations[focus].expression,
-    //   "expression",
-    //   value,
-    //   "value",
-    //   prevEquations[focus].expression + value,
-    //   "update"
-    // );
-
     let currentEquationCopy = {
       ...prevEquations[focus],
       expression: value,
     };
 
-    console.log(currentEquationCopy);
-    // FIND INDEX OF FOCUS,
-    //create a copy of array before index,
-    //copy of array after index,
-    const prevEquationsAfterFocus = prevEquations.map((equation, index) => {
-      if (index > focus) {
-        return equation;
-      }
-    });
+    let copy = [...prevEquations];
+    let newCopy = copy.slice(focus + 1, copy.length);
+
     let prevEquationsCopy;
-    if (prevEquationsAfterFocus.length > 1) {
-      prevEquationsCopy = [currentEquationCopy, ...prevEquationsAfterFocus];
+    if (newCopy.length > 0) {
+      prevEquationsCopy = [currentEquationCopy, ...newCopy];
     } else {
       prevEquationsCopy = [currentEquationCopy];
     }
+
     setPrevEquations(prevEquationsCopy);
-
-    // const updatedExpression = currentEquationCopy.expression + value;
-
-    // currentEquationCopy = {
-    //   ...currentEquationCopy,
-    //   expression: updatedExpression,
-    // };
-    // setCurrentEquation(currentEquationCopy);
-    // FIND INDEX OF FOCUS,
-    //create a copy of array before index,
-    //copy of array after index,
-    // const prevEquationsAfterFocus = prevEquations.map((equation, index) => {
-    //   if (index > focus) return equation;
-    // });
-    // spread with new equation in between
-    // const prevEquationsCopy = [currentEquationCopy, ...prevEquationsAfterFocus];
-    // console.log(currentEquationCopy, prevEquationsCopy);
-
-    // setPrevEquations(prevEquationsCopy);
   };
 
   const returnCurrentEquation = () => {
