@@ -5,6 +5,7 @@ import GridCenter from "./components/GridCenter";
 import GridRight from "./components/GridRight";
 import Options from "./components/Options";
 import Equations from "./components/Equations";
+import { calculate } from "./utils/calculate";
 
 const App = () => {
   const inputRef = useRef(null);
@@ -94,6 +95,7 @@ const App = () => {
       forwardRef: inputRef,
     };
     const prevEquationsCopy = [...prevEquations];
+    calculate(prevEquations[0].expression);
     if (focus === 0) {
       setPrevEquations([resetEquation, ...prevEquationsCopy]);
     } else {
