@@ -16,29 +16,39 @@ import { useTransition } from "react";
 // ];
 
 function Equations({ currentEquation, prevEquations, handleKeyPress }) {
-  const [focus, setFocus] = useState(0);
+  // const [focus, setFocus] = useState(0);
   const clickHandler = (indexOfEquation) => {
     setFocus(indexOfEquation);
   };
   const equationComponents = prevEquations.map((equation, i) => {
+    console.log(equation, "look here");
     if (i === focus)
       return (
         <Equation
-          focus={true}
           index={i}
           clickHandler={clickHandler}
           handleKeyPress={handleKeyPress}
+          equation={equation}
         />
       );
-    return <Equation focus={false} index={i} clickHandler={clickHandler} />;
+    return (
+      <Equation
+        focus={false}
+        index={i}
+        clickHandler={clickHandler}
+        handleKeyPress={handleKeyPress}
+        equation={equation}
+      />
+    );
   });
 
   return (
     <div className="equation-container">
       <Equation
         focus={true}
+        index={0}
         clickHandler={clickHandler}
-        currentEquation={currentEquation}
+        equation={currentEquation}
         handleKeyPress={handleKeyPress}
       />
       {equationComponents}

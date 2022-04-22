@@ -1,6 +1,6 @@
 import React from "react";
 
-function GridRight() {
+function GridRight({ returnEquation }) {
   return (
     <div className="buttons-right">
       <div className="right-row top">
@@ -24,9 +24,13 @@ function GridRight() {
           <i className="material-icons">backspace</i>
         </div>
       </div>
-      <div className="right-row bottom">
-        <div className="button">&#11152;</div>
-      </div>
+      <button
+        className="right-row bottom button"
+        onClick={() => returnEquation()}
+      >
+        {/* <div className="button">&#11152;</div> */}
+        &#11152;
+      </button>
     </div>
   );
 }

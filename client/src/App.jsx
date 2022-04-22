@@ -18,19 +18,27 @@ const App = () => {
       ...currentEquation,
     };
     currentEquationCopy = {
+      ...currentEquationCopy,
       expression: currentEquationCopy.expression + value,
     };
     setCurrentEquation(currentEquationCopy);
   };
 
   const keyPressHandler = (value) => {
+    console.log(currentEquation, "current");
     let currentEquationCopy = {
       ...currentEquation,
     };
+    console.log(currentEquationCopy, "current Equation Copy");
     currentEquationCopy = {
+      ...currentEquationCopy,
       expression: value,
     };
     setCurrentEquation(currentEquationCopy);
+  };
+
+  const returnCurrentEquation = () => {
+    setPrevEquations([...prevEquations, currentEquation]);
   };
 
   return (
@@ -45,7 +53,7 @@ const App = () => {
         <div className="bottom-section">
           <Trig />
           <GridCenter clickHandler={clickHandler} />
-          <GridRight />
+          <GridRight returnEquation={returnCurrentEquation} />
         </div>
       </div>
     </div>

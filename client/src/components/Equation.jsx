@@ -1,13 +1,9 @@
 import React, { useState } from "react";
 
-function Equation({
-  focus,
-  index,
-  clickHandler,
-  currentEquation,
-  handleKeyPress,
-}) {
-  const { expression, output } = currentEquation;
+function Equation({ focus, index, clickHandler, equation, handleKeyPress }) {
+  console.log(equation, index);
+  const { expression, output } = equation;
+
   return (
     <div
       className="equation"
