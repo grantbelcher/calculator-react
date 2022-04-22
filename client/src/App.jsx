@@ -9,7 +9,7 @@ import Equations from "./components/Equations";
 const App = () => {
   const [prevEquations, setPrevEquations] = useState([
     {
-      expression: "69",
+      expression: "",
       output: "",
     },
   ]);
@@ -67,15 +67,12 @@ const App = () => {
         return equation;
       }
     });
-    // spread with new equation in between
     let prevEquationsCopy;
     if (prevEquationsAfterFocus.length > 1) {
       prevEquationsCopy = [currentEquationCopy, ...prevEquationsAfterFocus];
     } else {
       prevEquationsCopy = [currentEquationCopy];
     }
-    console.log(currentEquationCopy, prevEquationsCopy);
-
     setPrevEquations(prevEquationsCopy);
 
     // const updatedExpression = currentEquationCopy.expression + value;
@@ -103,7 +100,8 @@ const App = () => {
       expression: "",
       output: "",
     };
-    setCurrentEquation(resetEquation);
+    const prevEquationsCopy = [...prevEquations];
+    setPrevEquations([resetEquation, ...prevEquationsCopy]);
   };
 
   // useEffect(() => {
