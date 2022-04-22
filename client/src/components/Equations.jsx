@@ -27,7 +27,12 @@ function Equations({ prevEquations }) {
     return <Equation focus={false} index={i} clickHandler={clickHandler} />;
   });
 
-  return <div className="equation-container">{equationComponents}</div>;
+  return (
+    <div className="equation-container">
+      <Equation focus={true} clickHandler={clickHandler} />
+      {equationComponents}
+    </div>
+  );
 }
 
 export default Equations;
