@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Test from "./components/Test/Test";
 import Trig from "./components/Trig/Trig";
 import GridCenter from "./components/GridCenter";
@@ -7,12 +7,24 @@ import Options from "./components/Options";
 import Equations from "./components/Equations";
 
 const App = () => {
+  const inputRef = useRef(null);
+
   const [prevEquations, setPrevEquations] = useState([
     {
       expression: "",
       output: "",
+      forwardRef: inputRef,
     },
   ]);
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, [prevEquations.length]);
+
   const [focus, setFocus] = useState(0);
   // const [currentEquation, setCurrentEquation] = useState(prevEquations[focus]);
 
@@ -67,14 +79,11 @@ const App = () => {
     const resetEquation = {
       expression: "",
       output: "",
+      forwardRef: inputRef,
     };
     const prevEquationsCopy = [...prevEquations];
     setPrevEquations([resetEquation, ...prevEquationsCopy]);
   };
-
-  // useEffect(() => {
-  //   setPrevEquations([...prevEquations, currentEquation]);
-  // }, [currentEquation]);
 
   return (
     <div className="container">
@@ -83,6 +92,7 @@ const App = () => {
         // currentEquation={currentEquation}
         handleKeyPress={keyPressHandler}
         handleFocus={focusHandler}
+        inputRef={inputRef}
         focus={focus}
       />
       <div className="calculator-api">

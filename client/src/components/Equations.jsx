@@ -21,25 +21,32 @@ function Equations({
   handleKeyPress,
   handleFocus,
   focus,
+  inputRef,
 }) {
   let equationComponents = prevEquations.map((equation, i) => {
-    if (i === focus)
+    const { expression, output, forwardRef } = equation;
+    if (i === focus) {
       return (
         <Equation
           index={i}
           clickHandler={() => handleFocus(i)}
           handleKeyPress={handleKeyPress}
-          equation={equation}
+          expression={expression}
+          output={output}
+          forwardRef={forwardRef}
           focus={true}
         />
       );
+    }
     return (
       <Equation
         focus={false}
         index={i}
         clickHandler={() => handleFocus(i)}
         handleKeyPress={handleKeyPress}
-        equation={equation}
+        expression={expression}
+        output={output}
+        forwadRef={false}
       />
     );
   });
