@@ -1,3 +1,10 @@
 export function calculate(string) {
-  console.log(string, "from utils folder");
+  let output;
+  try {
+    output = eval(string);
+    // var d = eval("x + 17 + ");
+  } catch (error) {
+    output = "err";
+  }
+  return output;
 }

@@ -69,10 +69,21 @@ const App = () => {
   };
 
   const keyPressHandler = (value) => {
-    let currentEquationCopy = {
-      ...prevEquations[focus],
-      expression: value,
-    };
+    const output = calculate(value);
+    let currentEquationCopy;
+    if (output === "err") {
+      currentEquationCopy = {
+        ...prevEquations[focus],
+        expression: value,
+        output: "",
+      };
+    } else {
+      currentEquationCopy = {
+        ...prevEquations[focus],
+        expression: value,
+        output,
+      };
+    }
 
     let copy = [...prevEquations];
     let newCopyAfterIndex = copy.slice(focus + 1, copy.length);
@@ -95,7 +106,6 @@ const App = () => {
       forwardRef: inputRef,
     };
     const prevEquationsCopy = [...prevEquations];
-    calculate(prevEquations[0].expression);
     if (focus === 0) {
       setPrevEquations([resetEquation, ...prevEquationsCopy]);
     } else {
