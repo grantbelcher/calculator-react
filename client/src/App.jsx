@@ -70,20 +70,12 @@ const App = () => {
 
   const keyPressHandler = (value) => {
     const output = calculate(value);
-    let currentEquationCopy;
-    if (output === "err") {
-      currentEquationCopy = {
-        ...prevEquations[focus],
-        expression: value,
-        output: "",
-      };
-    } else {
-      currentEquationCopy = {
-        ...prevEquations[focus],
-        expression: value,
-        output,
-      };
-    }
+
+    let currentEquationCopy = {
+      ...prevEquations[focus],
+      expression: value,
+      output,
+    };
 
     let copy = [...prevEquations];
     let newCopyAfterIndex = copy.slice(focus + 1, copy.length);
