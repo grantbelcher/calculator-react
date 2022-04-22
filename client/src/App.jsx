@@ -45,14 +45,25 @@ const App = () => {
   // };
 
   const clickHandler = (value) => {
-    // let currentEquationCopy = {
-    //   ...prevEquations[focus],
-    // };
-    // currentEquationCopy = {
-    //   ...currentEquationCopy,
-    //   expression: currentEquationCopy.expression + value,
-    // };
-    // setCurrentEquation(currentEquationCopy);
+    let currentEquationCopy = {
+      ...prevEquations[focus],
+    };
+    currentEquationCopy = {
+      ...currentEquationCopy,
+      expression: currentEquationCopy.expression + value,
+    };
+    let copy = [...prevEquations];
+    let newCopyAfterIndex = copy.slice(focus + 1, copy.length);
+
+    let newCopyBeforeIndex = copy.slice(0, focus);
+
+    let prevEquationsCopy;
+    prevEquationsCopy = [
+      ...newCopyBeforeIndex,
+      currentEquationCopy,
+      ...newCopyAfterIndex,
+    ];
+    setPrevEquations(prevEquationsCopy);
   };
 
   const keyPressHandler = (value) => {
