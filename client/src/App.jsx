@@ -23,11 +23,22 @@ const App = () => {
     setCurrentEquation(currentEquationCopy);
   };
 
+  const keyPressHandler = (value) => {
+    let currentEquationCopy = {
+      ...currentEquation,
+    };
+    currentEquationCopy = {
+      expression: value,
+    };
+    setCurrentEquation(currentEquationCopy);
+  };
+
   return (
     <div className="container">
       <Equations
         prevEquations={prevEquations}
         currentEquation={currentEquation}
+        handleKeyPress={keyPressHandler}
       />
       <div className="calculator-api">
         <Options />

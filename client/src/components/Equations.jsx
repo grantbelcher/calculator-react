@@ -15,15 +15,21 @@ import { useTransition } from "react";
 //   "1000/10/25/4=1",
 // ];
 
-function Equations({ currentEquation, prevEquations }) {
+function Equations({ currentEquation, prevEquations, handleKeyPress }) {
   const [focus, setFocus] = useState(0);
-
   const clickHandler = (indexOfEquation) => {
     setFocus(indexOfEquation);
   };
   const equationComponents = prevEquations.map((equation, i) => {
     if (i === focus)
-      return <Equation focus={true} index={i} clickHandler={clickHandler} />;
+      return (
+        <Equation
+          focus={true}
+          index={i}
+          clickHandler={clickHandler}
+          handleKeyPress={handleKeyPress}
+        />
+      );
     return <Equation focus={false} index={i} clickHandler={clickHandler} />;
   });
 
@@ -33,6 +39,7 @@ function Equations({ currentEquation, prevEquations }) {
         focus={true}
         clickHandler={clickHandler}
         currentEquation={currentEquation}
+        handleKeyPress={handleKeyPress}
       />
       {equationComponents}
     </div>

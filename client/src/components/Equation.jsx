@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 
-function Equation({ focus, index, clickHandler, currentEquation }) {
+function Equation({
+  focus,
+  index,
+  clickHandler,
+  currentEquation,
+  handleKeyPress,
+}) {
   const { expression, output } = currentEquation;
-
   return (
     <div
       className="equation"
@@ -13,6 +18,7 @@ function Equation({ focus, index, clickHandler, currentEquation }) {
         autoFocus={focus}
         type="text"
         className="expression"
+        onChange={(e) => handleKeyPress(e.target.value)}
         value={expression}
       />
       <div className="output-container">
