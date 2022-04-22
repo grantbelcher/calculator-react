@@ -82,7 +82,11 @@ const App = () => {
       forwardRef: inputRef,
     };
     const prevEquationsCopy = [...prevEquations];
-    setPrevEquations([resetEquation, ...prevEquationsCopy]);
+    if (focus === 0) {
+      setPrevEquations([resetEquation, ...prevEquationsCopy]);
+    } else {
+      setPrevEquations(prevEquationsCopy);
+    }
   };
 
   return (
