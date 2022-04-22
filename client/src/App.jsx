@@ -8,14 +8,32 @@ import Equations from "./components/Equations";
 
 const App = () => {
   const [prevEquations, setPrevEquations] = useState([]);
+  const [currentEquation, setCurrentEquation] = useState({
+    expression: "",
+    output: "",
+  });
+
+  const clickHandler = (value) => {
+    let currentEquationCopy = {
+      ...currentEquation,
+    };
+    currentEquationCopy = {
+      expression: currentEquationCopy.expression + value,
+    };
+    setCurrentEquation(currentEquationCopy);
+  };
+
   return (
     <div className="container">
-      <Equations prevEquations={prevEquations} />
+      <Equations
+        prevEquations={prevEquations}
+        currentEquation={currentEquation}
+      />
       <div className="calculator-api">
         <Options />
         <div className="bottom-section">
           <Trig />
-          <GridCenter />
+          <GridCenter clickHandler={clickHandler} />
           <GridRight />
         </div>
       </div>

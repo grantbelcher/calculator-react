@@ -15,7 +15,7 @@ import { useTransition } from "react";
 //   "1000/10/25/4=1",
 // ];
 
-function Equations({ prevEquations }) {
+function Equations({ currentEquation, prevEquations }) {
   const [focus, setFocus] = useState(0);
 
   const clickHandler = (indexOfEquation) => {
@@ -29,7 +29,11 @@ function Equations({ prevEquations }) {
 
   return (
     <div className="equation-container">
-      <Equation focus={true} clickHandler={clickHandler} />
+      <Equation
+        focus={true}
+        clickHandler={clickHandler}
+        currentEquation={currentEquation}
+      />
       {equationComponents}
     </div>
   );

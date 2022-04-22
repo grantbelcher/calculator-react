@@ -1,9 +1,15 @@
 import React from "react";
 
-function GridCenter() {
+function GridCenter({ clickHandler }) {
   return (
     <div className="grid-center">
-      <div className="button">7</div>
+      <button
+        className="button"
+        value={7}
+        onClick={(e) => clickHandler(e.target.value)}
+      >
+        7
+      </button>
       <div className="button">8</div>
       <div className="button">9</div>
       <div className="button">
