@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 function Equation({ focus, index, clickHandler, equation, handleKeyPress }) {
-  console.log(equation, index);
   const { expression, output } = equation;
 
   return (
