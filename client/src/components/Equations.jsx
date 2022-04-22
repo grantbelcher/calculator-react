@@ -20,6 +20,7 @@ function Equations({
   prevEquations,
   handleKeyPress,
   handleFocus,
+  focus,
 }) {
   let equationComponents = prevEquations.map((equation, i) => {
     if (i === focus)
@@ -29,6 +30,7 @@ function Equations({
           clickHandler={() => handleFocus(i)}
           handleKeyPress={handleKeyPress}
           equation={equation}
+          focus={true}
         />
       );
     return (

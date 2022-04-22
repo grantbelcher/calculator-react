@@ -50,15 +50,16 @@ const App = () => {
     };
 
     let copy = [...prevEquations];
-    let newCopy = copy.slice(focus + 1, copy.length);
+    let newCopyAfterIndex = copy.slice(focus + 1, copy.length);
+
+    let newCopyBeforeIndex = copy.slice(0, focus);
 
     let prevEquationsCopy;
-    if (newCopy.length > 0) {
-      prevEquationsCopy = [currentEquationCopy, ...newCopy];
-    } else {
-      prevEquationsCopy = [currentEquationCopy];
-    }
-
+    prevEquationsCopy = [
+      ...newCopyBeforeIndex,
+      currentEquationCopy,
+      ...newCopyAfterIndex,
+    ];
     setPrevEquations(prevEquationsCopy);
   };
 
@@ -82,6 +83,7 @@ const App = () => {
         // currentEquation={currentEquation}
         handleKeyPress={keyPressHandler}
         handleFocus={focusHandler}
+        focus={focus}
       />
       <div className="calculator-api">
         <Options />
