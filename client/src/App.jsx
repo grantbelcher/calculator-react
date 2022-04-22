@@ -64,6 +64,7 @@ const App = () => {
       ...newCopyAfterIndex,
     ];
     setPrevEquations(prevEquationsCopy);
+    inputRef.current.focus();
   };
 
   const keyPressHandler = (value) => {
