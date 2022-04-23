@@ -28,6 +28,7 @@ function Equations({
     if (i === focus) {
       return (
         <Equation
+          key={i}
           index={i}
           clickHandler={() => handleFocus(i)}
           handleKeyPress={handleKeyPress}
