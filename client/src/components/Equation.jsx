@@ -17,7 +17,12 @@ function Equation({
   } else if (output === "error") {
     outputDisplay = <i class="fas fa-exclamation-triangle"></i>;
   } else {
-    outputDisplay = `= ${output}`;
+    outputDisplay = (
+      <nobr>
+        <span className="output">= </span>
+        <span className="output">{output}</span>
+      </nobr>
+    );
   }
   return (
     <div
@@ -34,9 +39,7 @@ function Equation({
         // onKeyPress={(e) => console.log(e.key, "look here")}
         value={expression}
       />
-      <div className="output-container">
-        <span className="output">{outputDisplay}</span>
-      </div>
+      <div className="output-container">{outputDisplay}</div>
     </div>
   );
 }
