@@ -46,4 +46,6 @@ function Equation({
   );
 }
 
-export default Equation;
+const MemoizedEquation = React.memo(Equation);
+
+export default MemoizedEquation;

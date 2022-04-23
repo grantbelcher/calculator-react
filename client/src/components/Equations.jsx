@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Equation from "./Equation";
+import MemoizedEquation from "./Equation";
 import { useTransition } from "react";
 
 // let equation = [
@@ -27,7 +27,7 @@ function Equations({
     const { expression, output, forwardRef } = equation;
     if (i === focus) {
       return (
-        <Equation
+        <MemoizedEquation
           key={i}
           index={i}
           clickHandler={() => handleFocus(i)}
@@ -40,7 +40,7 @@ function Equations({
       );
     }
     return (
-      <Equation
+      <MemoizedEquation
         focus={false}
         index={i}
         clickHandler={() => handleFocus(i)}
@@ -54,7 +54,7 @@ function Equations({
 
   const newEquation = (
     <div className="equation-container">
-      <Equation
+      <MemoizedEquation
         focus={true}
         clickHandler={handleFocus}
         equation={currentEquation}
