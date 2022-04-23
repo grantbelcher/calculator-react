@@ -25,10 +25,11 @@ function Equations({
 }) {
   let equationComponents = prevEquations.map((equation, i) => {
     const { expression, output, forwardRef } = equation;
+
     if (i === focus) {
       return (
         <MemoizedEquation
-          key={i}
+          // key={i}
           index={i}
           clickHandler={() => handleFocus(i)}
           handleKeyPress={handleKeyPress}
@@ -39,10 +40,11 @@ function Equations({
         />
       );
     }
+
     return (
       <MemoizedEquation
         focus={false}
-        index={i}
+        // index={i}
         clickHandler={() => handleFocus(i)}
         handleKeyPress={handleKeyPress}
         expression={expression}

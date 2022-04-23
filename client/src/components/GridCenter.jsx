@@ -10,29 +10,89 @@ function GridCenter({ clickHandler }) {
       >
         7
       </button>
-      <div className="button">8</div>
-      <div className="button">9</div>
-      <div className="button">
+      <button
+        className="button"
+        value={8}
+        onClick={(e) => clickHandler(e.target.value)}
+      >
+        8
+      </button>
+      <button
+        className="button"
+        value={9}
+        onClick={(e) => clickHandler(e.target.value)}
+      >
+        9
+      </button>
+      <button className="button" value="/" onClick={() => clickHandler("/")}>
         <i className="fas fa-divide"></i>
-      </div>
-      <div className="button">4</div>
-      <div className="button">5</div>
-      <div className="button">6</div>
-      <div className="button">
+      </button>
+      <button
+        className="button"
+        value={4}
+        onClick={(e) => clickHandler(e.target.value)}
+      >
+        4
+      </button>
+      <button
+        className="button"
+        value={5}
+        onClick={(e) => clickHandler(e.target.value)}
+      >
+        5
+      </button>
+      <button
+        className="button"
+        value={6}
+        onClick={(e) => clickHandler(e.target.value)}
+      >
+        6
+      </button>
+      <button className="button" value="*" onClick={() => clickHandler("*")}>
         <i className="fas fa-times"></i>
-      </div>
-      <div className="button">1</div>
-      <div className="button">2</div>
-      <div className="button">3</div>
-      <div className="button">
+      </button>
+      <button
+        className="button"
+        value={1}
+        onClick={(e) => clickHandler(e.target.value)}
+      >
+        1
+      </button>
+      <button
+        className="button"
+        value={2}
+        onClick={(e) => clickHandler(e.target.value)}
+      >
+        2
+      </button>
+      <button
+        className="button"
+        value={3}
+        onClick={(e) => clickHandler(e.target.value)}
+      >
+        3
+      </button>
+      <button className="button" value="-" onClick={() => clickHandler("-")}>
         <i className="fas fa-minus"></i>
-      </div>
-      <div className="button">0</div>
-      <div className="button">.</div>
+      </button>
+      <button
+        className="button"
+        value={0}
+        onClick={(e) => clickHandler(e.target.value)}
+      >
+        0
+      </button>
+      <button
+        className="button"
+        value="."
+        onClick={(e) => clickHandler(e.target.value)}
+      >
+        .
+      </button>
       <div className="button">ans</div>
-      <div className="button">
+      <button className="button" value="+" onClick={() => clickHandler("+")}>
         <i className="fas fa-plus"></i>
-      </div>
+      </button>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function Equation({
-  focus,
+  // focus,
   index,
   clickHandler,
   handleKeyPress,
@@ -11,6 +11,7 @@ function Equation({
 }) {
   // console.log(expression, output, forwardRef, "from equation");
   // console.log(!forwardRef);
+  console.log(index, expression, output);
   let outputDisplay;
   if (output === null || output === "") {
     outputDisplay = "";
@@ -30,10 +31,10 @@ function Equation({
     <div
       className="equation"
       onClick={() => clickHandler(index)}
-      style={{ outline: focus ? "solid" : "none" }}
+      // style={{ outline: focus ? "solid" : "none" }}
     >
       <input
-        autoFocus={focus}
+        // autoFocus={focus}
         ref={forwardRef === undefined ? null : forwardRef}
         type="text"
         className="expression"

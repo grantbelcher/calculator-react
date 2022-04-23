@@ -30,22 +30,12 @@ const App = () => {
   // const [currentEquation, setCurrentEquation] = useState(prevEquations[focus]);
 
   const focusHandler = (indexOfEquation) => {
-    console.log(indexOfEquation);
     setFocus(indexOfEquation);
   };
 
-  // const clickHandler = (value) => {
-  //   let currentEquationCopy = {
-  //     ...prevEquations[focus],
-  //   };
-  //   currentEquationCopy = {
-  //     ...currentEquationCopy,
-  //     expression: currentEquationCopy.expression + value,
-  //   };
-  //   setCurrentEquation(currentEquationCopy);
-  // };
-
   const clickHandler = (value) => {
+    console.log(value, "value");
+
     let currentEquationCopy = {
       ...prevEquations[focus],
     };
