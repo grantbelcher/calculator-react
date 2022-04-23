@@ -34,14 +34,14 @@ const App = () => {
   };
 
   const clickHandler = (value) => {
-    console.log(value, "value");
-
     let currentEquationCopy = {
       ...prevEquations[focus],
     };
+    const output = calculate(currentEquationCopy.expression + value);
     currentEquationCopy = {
       ...currentEquationCopy,
       expression: currentEquationCopy.expression + value,
+      output,
     };
     let copy = [...prevEquations];
     let newCopyAfterIndex = copy.slice(focus + 1, copy.length);
@@ -81,6 +81,36 @@ const App = () => {
     setPrevEquations(prevEquationsCopy);
   };
 
+  const handleBackspace = () => {
+    let currentEquationCopy = {
+      ...prevEquations[focus],
+    };
+
+    const { expression: oldExpression } = currentEquationCopy;
+
+    const updatedExpression = oldExpression.slice(0, oldExpression.length - 1);
+
+    const output = calculate(updatedExpression);
+    currentEquationCopy = {
+      ...currentEquationCopy,
+      expression: updatedExpression,
+      output,
+    };
+    let copy = [...prevEquations];
+    let newCopyAfterIndex = copy.slice(focus + 1, copy.length);
+
+    let newCopyBeforeIndex = copy.slice(0, focus);
+
+    let prevEquationsCopy;
+    prevEquationsCopy = [
+      ...newCopyBeforeIndex,
+      currentEquationCopy,
+      ...newCopyAfterIndex,
+    ];
+    setPrevEquations(prevEquationsCopy);
+    inputRef.current.focus();
+  };
+
   const returnCurrentEquation = () => {
     const resetEquation = {
       expression: "",
@@ -110,7 +140,10 @@ const App = () => {
         <div className="bottom-section">
           <Trig />
           <GridCenter clickHandler={clickHandler} />
-          <GridRight returnEquation={returnCurrentEquation} />
+          <GridRight
+            handleBackspace={handleBackspace}
+            returnEquation={returnCurrentEquation}
+          />
         </div>
       </div>
     </div>

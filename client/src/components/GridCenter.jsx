@@ -24,7 +24,7 @@ function GridCenter({ clickHandler }) {
       >
         9
       </button>
-      <button className="button" value="/" onClick={() => clickHandler("/")}>
+      <button className="button" value="/" onClick={() => clickHandler(" / ")}>
         <i className="fas fa-divide"></i>
       </button>
       <button
@@ -48,7 +48,7 @@ function GridCenter({ clickHandler }) {
       >
         6
       </button>
-      <button className="button" value="*" onClick={() => clickHandler("*")}>
+      <button className="button" value="*" onClick={() => clickHandler(" * ")}>
         <i className="fas fa-times"></i>
       </button>
       <button
@@ -72,7 +72,7 @@ function GridCenter({ clickHandler }) {
       >
         3
       </button>
-      <button className="button" value="-" onClick={() => clickHandler("-")}>
+      <button className="button" value="-" onClick={() => clickHandler(" - ")}>
         <i className="fas fa-minus"></i>
       </button>
       <button
@@ -90,7 +90,7 @@ function GridCenter({ clickHandler }) {
         .
       </button>
       <div className="button">ans</div>
-      <button className="button" value="+" onClick={() => clickHandler("+")}>
+      <button className="button" value="+" onClick={() => clickHandler(" + ")}>
         <i className="fas fa-plus"></i>
       </button>
     </div>
