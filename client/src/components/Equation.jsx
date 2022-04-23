@@ -15,12 +15,14 @@ function Equation({
   if (output === null || output === "") {
     outputDisplay = "";
   } else if (output === "error") {
-    outputDisplay = <i class="fas fa-exclamation-triangle"></i>;
+    outputDisplay = (
+      <i className="fas fa-exclamation-triangle w3-animate-opacity"></i>
+    );
   } else {
     outputDisplay = (
       <nobr>
-        <span className="output">= </span>
-        <span className="output">{output}</span>
+        <span className="output w3-animate-opacity">= </span>
+        <span className="output w3-animate-opacity">{output}</span>
       </nobr>
     );
   }
@@ -39,7 +41,7 @@ function Equation({
         // onKeyPress={(e) => console.log(e.key, "look here")}
         value={expression}
       />
-      <div className="output-container">{outputDisplay}</div>
+      <div className="output-container w3-container">{outputDisplay}</div>
     </div>
   );
 }
