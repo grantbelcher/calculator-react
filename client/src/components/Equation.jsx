@@ -47,6 +47,4 @@ function Equation({
   );
 }
 
-const MemoizedEquation = Equation;
-
-export default MemoizedEquation;
+export default Equation;

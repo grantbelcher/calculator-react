@@ -1,6 +1,6 @@
 import React from "react";
 
-function Trig() {
+function Trig({ handlePi }) {
   return (
     <div className="trig-functions">
       <div className="button">
@@ -14,7 +14,9 @@ function Trig() {
       <div className="button">
         <sup>n</sup>√
       </div>
-      <div className="button">π</div>
+      <button className="button" value="π" onClick={() => handlePi("π")}>
+        π
+      </button>
       <div className="button">sin</div>
       <div className="button">cos</div>
       <div className="button">tan</div>

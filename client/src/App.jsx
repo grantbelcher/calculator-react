@@ -81,6 +81,16 @@ const App = () => {
     setPrevEquations(prevEquationsCopy);
   };
 
+  const handlePi = (pi) => {
+    let currentEquationCopy = {
+      ...prevEquations[focus],
+    };
+    let { expression } = currentEquationCopy;
+    expression += "π";
+    expression = calculate(expression);
+    console.log(expression);
+  };
+
   const handleBackspace = () => {
     let currentEquationCopy = {
       ...prevEquations[focus],
@@ -138,7 +148,7 @@ const App = () => {
       <div className="calculator-api">
         <Options />
         <div className="bottom-section">
-          <Trig />
+          <Trig handlePi={handlePi} />
           <GridCenter clickHandler={clickHandler} />
           <GridRight
             handleBackspace={handleBackspace}
