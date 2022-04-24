@@ -59,6 +59,31 @@ const App = () => {
   };
 
   const keyPressHandler = (value) => {
+    //DETECT BACKSPACE KEYPRESS
+    // find length of focused expression before keypress
+    let oldExpressionLength = prevEquations[focus].expression.length;
+    // compare to current length of value to determine if backspace was pressed
+    let backspaceKeypress = oldExpressionLength > value.length;
+
+    console.log(backspaceKeypress);
+
+    // find last char of string
+    let lastChar = value[value.length - 1];
+    // if lastChar is an operator
+    if (
+      lastChar === "+" ||
+      lastChar === "-" ||
+      lastChar === "*" ||
+      lastChar === "/"
+    ) {
+      // insert a space in value before operator
+      let stringBeforeOperator = value.slice(0, value.length - 1);
+      // insert a space in value after operator
+      let updatedString = stringBeforeOperator + " " + lastChar + " ";
+      value = updatedString;
+      console.log(value, "did it work?");
+    }
+
     const output = calculate(value);
 
     let currentEquationCopy = {

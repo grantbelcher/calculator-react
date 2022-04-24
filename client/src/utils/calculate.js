@@ -5,18 +5,18 @@ export function calculate(string) {
   let stringIsNaN = isNaN(Number(string));
 
   // check if string contains pi
-  let indexOfPi = string.search("π");
+  // let indexOfPi = string.search("π");
 
-  if (indexOfPi > -1) {
-    console.log(indexOfPi);
-    // use the index of pi, remove pi
-    const stringBeforePi = string.slice(0, indexOfPi);
-    const stringAfterPi = string.slice(indexOfPi + 1);
-    // console.log(stringBeforePi, stringAfterPi);
-    const updatedString = stringBeforePi + "Math.PI";
-    console.log(eval(updatedString));
-    // add * Math.Pi in its place
-  }
+  // if (indexOfPi > -1) {
+  //   console.log(indexOfPi);
+  //   // use the index of pi, remove pi
+  //   const stringBeforePi = string.slice(0, indexOfPi);
+  //   const stringAfterPi = string.slice(indexOfPi + 1);
+  //   // console.log(stringBeforePi, stringAfterPi);
+  //   const updatedString = stringBeforePi + "Math.PI"2;
+
+  //   // add * Math.Pi in its place
+  // }
   // if string is a single number
   // do not return output
 
@@ -25,7 +25,7 @@ export function calculate(string) {
     // evaluate
     try {
       // check if string contains pi
-      console.log(string.contains("π"));
+
       // if (string.contains("π")) {
       //   console.log("contains pi");
       // }
