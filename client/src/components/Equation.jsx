@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function Equation({
-  // focus,
+  focus,
   index,
   clickHandler,
   handleKeyPress,
@@ -9,21 +9,21 @@ function Equation({
   output,
   forwardRef,
 }) {
-  // console.log(expression, output, forwardRef, "from equation");
-  // console.log(!forwardRef);
-  console.log(index, expression, output);
+  // conditionally create className string to control when animation runs
+  let animationClass = focus === true ? "w3-animate-opacity" : "";
+
   let outputDisplay;
   if (output === null || output === "") {
     outputDisplay = "";
   } else if (output === "error") {
     outputDisplay = (
-      <i className="fas fa-exclamation-triangle w3-animate-opacity"></i>
+      <i className={`fas fa-exclamation-triangle w3-animate-opacity`}></i>
     );
   } else {
     outputDisplay = (
       <nobr>
-        <span className="output w3-animate-opacity">= </span>
-        <span className="output w3-animate-opacity">{output}</span>
+        <span className={`output ${animationClass}`}>= </span>
+        <span className={`output ${animationClass}`}>{output}</span>
       </nobr>
     );
   }
@@ -31,7 +31,7 @@ function Equation({
     <div
       className="equation"
       onClick={() => clickHandler(index)}
-      // style={{ outline: focus ? "solid" : "none" }}
+      style={{ outline: focus ? "solid" : "none" }}
     >
       <input
         // autoFocus={focus}
@@ -47,6 +47,6 @@ function Equation({
   );
 }
 
-const MemoizedEquation = React.memo(Equation);
+const MemoizedEquation = Equation;
 
 export default MemoizedEquation;

@@ -44,7 +44,7 @@ function Equations({
     return (
       <MemoizedEquation
         focus={false}
-        // index={i}
+        index={i}
         clickHandler={() => handleFocus(i)}
         handleKeyPress={handleKeyPress}
         expression={expression}
