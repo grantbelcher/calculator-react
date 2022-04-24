@@ -65,11 +65,25 @@ const App = () => {
     // compare to current length of value to determine if backspace was pressed
     let backspaceKeypress = oldExpressionLength > value.length;
 
-    console.log(backspaceKeypress);
-
     // find last char of string
     let lastChar = value[value.length - 1];
+
+    // if backspace was pressed
+    if (backspaceKeypress) {
+      // determine if an operator is being deleted
+      if (
+        lastChar === "+" ||
+        lastChar === "-" ||
+        lastChar === "*" ||
+        lastChar === "/"
+      ) {
+        // if an operator is being deleted, remove the operator and all white space around it
+        value = value.slice(0, value.length - 3);
+      }
+    }
+
     // if lastChar is an operator
+    lastChar = value[value.length - 1];
     if (
       lastChar === "+" ||
       lastChar === "-" ||
