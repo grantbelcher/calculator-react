@@ -2,7 +2,7 @@ function findAllIndexOfPi(string) {
   // create empty array to store indices on which pi occurs in a string
   let indexes = [];
   // iterate thru term
-  for (i = 0; i < string.length; i++) {
+  for (let i = 0; i < string.length; i++) {
     // if the character pi is found
     if (string[i] === "π") {
       // add index of pi to array
@@ -18,7 +18,7 @@ function replacePi(string, indexes) {
   // create an array to store new segments of the dirty term containing many Pi;s
   let newString = [];
   // iterate over the string
-  for (i = 0; i < string.length; i++) {
+  for (let i = 0; i < string.length; i++) {
     // if a character other than Pi is stored at the current index of the string
     if (!indexes.includes(i)) {
       // add the non-pi character to the array that we will join
@@ -66,7 +66,7 @@ let equation = "23π + π + 22 - 2π3 + ππ + 23π2443ππ4π23 + ππ3 + 2ππ
 
 console.log(reformatTermsWithPi("22"));
 
-function evaluateNastyEquationWithPi(eq) {
+export function evaluateNastyEquationWithPi(eq) {
   // split eq based on operators
   const componentsOfEquation = eq.split(" ");
   // create array of reformated terms containing pI
@@ -81,5 +81,3 @@ function evaluateNastyEquationWithPi(eq) {
   const joinAllTerms = reformattedTerms.join("");
   return joinAllTerms;
 }
-
-evaluateNastyEquationWithPi(equation);
