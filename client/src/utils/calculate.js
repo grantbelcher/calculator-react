@@ -2,15 +2,17 @@ import { evaluateNastyEquationWithPi } from "./reformatTermWithPi";
 
 export function calculate(string) {
   let output;
-  console.log(evaluateNastyEquationWithPi, "look here");
   // check if string is a single number
   let stringIsNaN = isNaN(Number(string));
 
   // check if string contains pi
-  // let indexOfPi = string.search("π");
+  let indexOfPi = string.search("π");
 
-  // if (indexOfPi > -1) {
+  if (indexOfPi > -1) {
+    string = evaluateNastyEquationWithPi(string);
+  }
 
+  console.log(string);
   //   // find all indexes of pi
 
   //   console.log(indexOfPi);

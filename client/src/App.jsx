@@ -187,7 +187,7 @@ const App = () => {
       <div className="calculator-api">
         <Options />
         <div className="bottom-section">
-          <Trig handlePi={handlePi} />
+          <Trig clickHandler={clickHandler} />
           <GridCenter clickHandler={clickHandler} />
           <GridRight
             handleBackspace={handleBackspace}

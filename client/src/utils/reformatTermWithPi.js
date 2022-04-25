@@ -70,7 +70,6 @@ export function evaluateNastyEquationWithPi(eq) {
   // split eq based on operators
   const componentsOfEquation = eq.split(" ");
   // create array of reformated terms containing pI
-  console.log(componentsOfEquation);
   const reformattedTerms = componentsOfEquation.map((term) => {
     if (term === "+" || term === "-" || term === "/" || term === "*") {
       return term;
