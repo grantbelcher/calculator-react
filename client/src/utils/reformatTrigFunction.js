@@ -1,3 +1,10 @@
+function trigFunctionPresent(expression) {
+  if (expression.search("sin") >= 0) return true;
+  if (expression.search("cos") >= 0) return true;
+  if (expression.search("tan") >= 0) return true;
+  return false;
+}
+
 function reformatSin(expression) {
   return expression.replace(/sin/g, `*Math.sin`);
 }
@@ -27,7 +34,7 @@ function multiplyAfterParenthesis(string) {
   return newString;
 }
 
-function removeExcessMultiplier(string) {
+export function removeExcessMultiplier(string) {
   // create a new array to store
   // split expression into individual elements
   let arrayOfElements = string.split(" ");
@@ -55,4 +62,22 @@ function removeExcessMultiplier(string) {
     }
   }
   return arrayOfElements.join("");
+}
+
+export function reformatAllTrig(string) {
+  // determine if Trig Functions are present
+  const trigIsPresent = trigFunctionPresent(string);
+
+  // if trig functions are present, reformat the expression, otherwise return
+  if (trigIsPresent === false) {
+    return string;
+  }
+  // replace sin,cos,tan in string with '*Math.sin, *Math.cos, *Math.tan'
+  let expression = reformatTrigFuncs(string);
+  // add a '*' after each trig function for automatic multiplication
+  expression = multiplyAfterParenthesis(expression);
+  // remove excess '*' that will break eval equation
+  let formattedExpression = removeExcessMultiplier(expression);
+
+  return formattedExpression;
 }

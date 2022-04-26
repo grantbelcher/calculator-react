@@ -1,4 +1,7 @@
 import { evaluateNastyEquationWithPi } from "./reformatTermWithPi";
+import { reformatAllTrig } from "./reformatTrigFunction";
+
+console.log(reformatAllTrig, "yoo");
 
 export function calculate(string) {
   let output;
@@ -12,20 +15,9 @@ export function calculate(string) {
     string = evaluateNastyEquationWithPi(string);
   }
 
-  console.log(string);
-  //   // find all indexes of pi
+  // check if trig functions are present
+  string = reformatAllTrig(string);
 
-  //   console.log(indexOfPi);
-  //   // use the index of pi, remove pi
-  //   const stringBeforePi = string.slice(0, indexOfPi);
-  //   const stringAfterPi = string.slice(indexOfPi + 1);
-  //   // console.log(stringBeforePi, stringAfterPi);
-  //   const updatedString = stringBeforePi + "Math.PI";
-  // }
-  // // if string is a single number
-  // // do not return output
-
-  // if string is an expression or NaN
   if (stringIsNaN) {
     // evaluate
     try {

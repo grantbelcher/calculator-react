@@ -95,7 +95,6 @@ const App = () => {
       // insert a space in value after operator
       let updatedString = stringBeforeOperator + " " + lastChar + " ";
       value = updatedString;
-      console.log(value, "did it work?");
     }
 
     const output = calculate(value);
