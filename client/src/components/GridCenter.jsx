@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ThemeContext } from "../context/theme";
 
 function GridCenter({ clickHandler }) {
-  const theme = "light";
+  const { theme } = useContext(ThemeContext);
   const operationTheme = `button operation-button-${theme}`;
   const numberTheme = `button num-button-${theme}`;
   return (

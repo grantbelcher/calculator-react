@@ -1,6 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { ThemeContextProvider } from "./context/theme";
 
 import App from "./App";
 
-ReactDOM.render(<App />, document.querySelector("#root"));
+ReactDOM.render(
+  <ThemeContextProvider>
+    <App />
+  </ThemeContextProvider>,
+  document.querySelector("#root")
+);

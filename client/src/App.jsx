@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
+import { ThemeContext } from "./context/theme";
 import Test from "./components/Test/Test";
 import Trig from "./components/Trig/Trig";
 import GridCenter from "./components/GridCenter";
@@ -8,9 +9,9 @@ import Equations from "./components/Equations";
 import { calculate } from "./utils/calculate";
 
 const App = () => {
-  const inputRef = useRef(null);
+  const { theme } = useContext(ThemeContext);
 
-  const [theme, setTheme] = useState("light");
+  const inputRef = useRef(null);
 
   const [prevEquations, setPrevEquations] = useState([
     {

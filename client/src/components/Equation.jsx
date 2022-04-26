@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { ThemeContext } from "../context/theme";
 
 function Equation({
   focus,
@@ -9,6 +10,8 @@ function Equation({
   output,
   forwardRef,
 }) {
+  const { theme } = useContext(ThemeContext);
+  const themeClass = `eq-${theme}`;
   // conditionally create className string to control when animation runs
   let animationClass = focus === true ? "w3-animate-opacity" : "";
 
@@ -17,16 +20,21 @@ function Equation({
     outputDisplay = "";
   } else if (output === "error") {
     outputDisplay = (
-      <i className={`fas fa-exclamation-triangle w3-animate-opacity`}></i>
+      <i
+        className={`fas fa-exclamation-triangle w3-animate-opacity ${themeClass}`}
+      ></i>
     );
   } else {
     outputDisplay = (
       <nobr>
-        <span className={`output ${animationClass}`}>= </span>
-        <span className={`output ${animationClass}`}>{output}</span>
+        <span className={`output ${animationClass} ${themeClass}`}>= </span>
+        <span className={`output ${animationClass} ${themeClass}`}>
+          {output}
+        </span>
       </nobr>
     );
   }
+
   return (
     <div
       className="equation"
@@ -37,7 +45,7 @@ function Equation({
         // autoFocus={focus}
         ref={forwardRef === undefined ? null : forwardRef}
         type="text"
-        className="expression"
+        className={`expression ${themeClass}`}
         onChange={(e) => handleKeyPress(e.target.value)}
         // onKeyPress={(e) => console.log(e.key, "look here")}
         value={expression}

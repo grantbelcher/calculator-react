@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ThemeContext } from "../../context/theme";
 
 function Trig({ clickHandler }) {
-  const theme = "light";
+  const { theme } = useContext(ThemeContext);
   const buttonTheme = `button operation-button-${theme}`;
   return (
     <div className="trig-functions">
