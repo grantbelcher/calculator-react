@@ -4,6 +4,38 @@ body {
   color: rgb(255, 252, 238);
 }
 
+.background-dark {
+  background: black;
+}
+
+.background-light {
+  background-color: #ffffff;
+}
+
+.focus-light {
+  background-color: #4781b9;
+}
+
+.focus-dark {
+  background-color: ;#FFA81E
+}
+
+.operation-button-dark {
+  background-color: #121212;
+}
+
+.operation-button-light {
+  background-color: #fbfbfb;
+}
+
+.num-button-dark {
+  background-color: #373737;
+}
+
+.num-button-light {
+  background-color: #cacaca;
+}
+
 @media screen and (min-width: 600px) {
   #root {
     display: flex;
