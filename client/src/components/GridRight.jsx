@@ -1,32 +1,37 @@
 import React from "react";
 
 function GridRight({ returnEquation, handleBackspace }) {
+  const theme = "light";
+  const operationTheme = `button operation-button-${theme}`;
+  const numberTheme = `button num-button-${theme}`;
+  const returnTheme = `button focus-${theme}`;
+
   return (
     <div className="buttons-right">
       <div className="right-row top">
-        <div className="button">
+        <div className={operationTheme}>
           <i className="material-icons">percent</i>
         </div>
-        <div className="button">
+        <div className={operationTheme}>
           <sup>a</sup>/<sub>b</sub>
         </div>
       </div>
       <div className="right-row top">
-        <div className="button">
+        <div className={numberTheme}>
           <i className="material-icons">arrow_back</i>
         </div>
-        <div className="button">
+        <div className={numberTheme}>
           <i className="material-icons">arrow_forward</i>
         </div>
       </div>
       <button
-        className="right-row bottom button"
+        className={`right-row bottom ${numberTheme}`}
         onClick={() => handleBackspace()}
       >
         <i className="material-icons">backspace</i>
       </button>
       <button
-        className="right-row bottom button"
+        className={`right-row bottom ${returnTheme}`}
         onClick={() => returnEquation()}
       >
         {/* <div className="button">&#11152;</div> */}

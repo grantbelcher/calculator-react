@@ -10,6 +10,8 @@ import { calculate } from "./utils/calculate";
 const App = () => {
   const inputRef = useRef(null);
 
+  const [theme, setTheme] = useState("light");
+
   const [prevEquations, setPrevEquations] = useState([
     {
       expression: "",
@@ -174,8 +176,11 @@ const App = () => {
     }
   };
 
+  const containerTheme = `background-${theme}`;
+  const calcTheme = `buttons-bg-${theme}`;
+
   return (
-    <div className="container">
+    <div className={`container ${containerTheme}`}>
       <Equations
         prevEquations={prevEquations}
         // currentEquation={currentEquation}
@@ -184,7 +189,7 @@ const App = () => {
         inputRef={inputRef}
         focus={focus}
       />
-      <div className="calculator-api">
+      <div className={`calculator-api ${calcTheme}`}>
         <Options />
         <div className="bottom-section">
           <Trig clickHandler={clickHandler} />

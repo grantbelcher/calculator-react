@@ -1,50 +1,68 @@
 import React from "react";
 
 function Trig({ clickHandler }) {
+  const theme = "light";
+  const buttonTheme = `button operation-button-${theme}`;
   return (
     <div className="trig-functions">
-      <div className="button">
+      <button className={buttonTheme}>
         x<sup>2</sup>
-      </div>
-      <div className="button">
+      </button>
+      <button className={buttonTheme}>
         x<sup>b</sup>
-      </div>
-      <div className="button">| a |</div>
-      <div className="button">√ </div>
-      <div className="button">
+      </button>
+      <button className={buttonTheme}>| a |</button>
+      <button className={buttonTheme}>√ </button>
+      <button className={buttonTheme}>
         <sup>n</sup>√
-      </div>
-      <button className="button" value="π" onClick={() => clickHandler("π")}>
+      </button>
+      <button
+        className={buttonTheme}
+        value="π"
+        onClick={() => clickHandler("π")}
+      >
         π
       </button>
       <button
-        className="button"
+        className={buttonTheme}
         value="sin"
         onClick={() => clickHandler("sin(")}
       >
         sin
       </button>
       <button
-        className="button"
+        className={buttonTheme}
         value="cos"
         onClick={() => clickHandler("cos(")}
       >
         cos
       </button>
       <button
-        className="button"
+        className={buttonTheme}
         value="tan"
         onClick={() => clickHandler("tan(")}
       >
         tan
       </button>
-      <button className="button" value="(" onClick={() => clickHandler("(")}>
+      <button
+        className={buttonTheme}
+        value="("
+        onClick={() => clickHandler("(")}
+      >
         (
       </button>
-      <button className="button" value=")" onClick={() => clickHandler(")")}>
+      <button
+        className={buttonTheme}
+        value=")"
+        onClick={() => clickHandler(")")}
+      >
         )
       </button>
-      <button className="button" value="," onClick={() => clickHandler(",")}>
+      <button
+        className={buttonTheme}
+        value=","
+        onClick={() => clickHandler(",")}
+      >
         ,
       </button>
     </div>
