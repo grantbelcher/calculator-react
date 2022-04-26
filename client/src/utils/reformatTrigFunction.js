@@ -1,5 +1,3 @@
-let string = "sin(30) + tan(40)sin(15)cos(30)sin(32) + cos(21)";
-
 function reformatSin(expression) {
   return expression.replace(/sin/g, `*Math.sin`);
 }
@@ -16,12 +14,10 @@ function reformatTrigFuncs(string) {
   newString = reformatTan(newString);
   return newString;
 }
-// "sin(30) + tan(40)sin(15)cos(30)sin(32) + cos(21)10"
-let reformattedExpression = reformatTrigFuncs(string);
 
 function multiplyAfterParenthesis(string) {
   let newString = "";
-  for (i = 0; i < string.length; i++) {
+  for (let i = 0; i < string.length; i++) {
     if (string[i] === ")" && string[i + 1] !== " " && string[i + 1] !== "*") {
       newString += string[i] + "*";
     } else {
@@ -31,13 +27,10 @@ function multiplyAfterParenthesis(string) {
   return newString;
 }
 
-let x = multiplyAfterParenthesis(reformattedExpression);
-
 function removeExcessMultiplier(string) {
   // create a new array to store
   // split expression into individual elements
   let arrayOfElements = string.split(" ");
-  console.log(arrayOfElements);
   // iterate over array of elements
   for (let i = 0; i < arrayOfElements.length; i++) {
     // if an element begins with a multiplier, then it is excess and needs to       be removed
@@ -63,7 +56,3 @@ function removeExcessMultiplier(string) {
   }
   return arrayOfElements.join("");
 }
-
-let finalTest = removeExcessMultiplier(x);
-console.log(eval(finalTest));
-// console.log(eval(finalTest))
