@@ -78,6 +78,6 @@ export function reformatAllTrig(string) {
   expression = multiplyAfterParenthesis(expression);
   // remove excess '*' that will break eval equation
   let formattedExpression = removeExcessMultiplier(expression);
-
+  console.log(formattedExpression);
   return formattedExpression;
 }
