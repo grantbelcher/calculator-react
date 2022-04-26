@@ -17,12 +17,36 @@ function Trig({ clickHandler }) {
       <button className="button" value="π" onClick={() => clickHandler("π")}>
         π
       </button>
-      <div className="button">sin</div>
-      <div className="button">cos</div>
-      <div className="button">tan</div>
-      <div className="button">(</div>
-      <div className="button">)</div>
-      <div className="button">,</div>
+      <button
+        className="button"
+        value="sin"
+        onClick={() => clickHandler("sin(")}
+      >
+        sin
+      </button>
+      <button
+        className="button"
+        value="cos"
+        onClick={() => clickHandler("cos(")}
+      >
+        cos
+      </button>
+      <button
+        className="button"
+        value="tan"
+        onClick={() => clickHandler("tan(")}
+      >
+        tan
+      </button>
+      <button className="button" value="(" onClick={() => clickHandler("(")}>
+        (
+      </button>
+      <button className="button" value=")" onClick={() => clickHandler(")")}>
+        )
+      </button>
+      <button className="button" value="," onClick={() => clickHandler(",")}>
+        ,
+      </button>
     </div>
   );
 }

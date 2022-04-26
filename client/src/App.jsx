@@ -102,6 +102,7 @@ const App = () => {
     let currentEquationCopy = {
       ...prevEquations[focus],
       expression: value,
+
       output,
     };
 
