@@ -255,10 +255,20 @@ const App = () => {
 
   const clearEquations = () => {
     if (shouldClearAll) {
-      console.log();
+      setFocus(0);
+      setPrevEquations([
+        {
+          expression: "",
+          output: "",
+          forwardRef: inputRef,
+          carrotIndex: 0,
+        },
+      ]);
+      inputRef.current.focus();
     } else {
       // set value of input to be blank
       keyPressHandler("");
+      inputRef.current.focus();
     }
   };
 
