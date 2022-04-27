@@ -3,6 +3,8 @@ import { ThemeContext } from "../context/theme";
 
 function Equation({
   focus,
+  focusIndex,
+  handleFocus,
   index,
   clickHandler,
   handleKeyPress,
@@ -11,6 +13,12 @@ function Equation({
   forwardRef,
   inputRef,
 }) {
+  const handleArrows = (key) => {
+    if (key === "ArrowUp") {
+      // handleFocus(focusIndex + 1);
+    }
+  };
+
   const { theme } = useContext(ThemeContext);
   const themeClass = `eq-${theme}`;
   // conditionally create className string to control when animation runs
@@ -43,10 +51,11 @@ function Equation({
     >
       <input
         // autoFocus={focus}
-        ref={forwardRef === undefined ? null : forwardRef}
+        ref={focusIndex === index ? forwardRef : null}
         type="text"
         className={`expression ${themeClass}`}
         onChange={(e) => handleKeyPress(e.target.value)}
+        onKeyDown={(e) => handleArrows(e.key)}
         value={expression}
       />
       <div className="output-container w3-container">{outputDisplay}</div>

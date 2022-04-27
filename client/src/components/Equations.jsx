@@ -37,6 +37,8 @@ function Equations({
           output={output}
           forwardRef={forwardRef}
           focus={true}
+          focusIndex={focus}
+          handleFocus={handleFocus}
           inputRef={inputRef}
         />
       );
@@ -45,6 +47,9 @@ function Equations({
     return (
       <Equation
         focus={false}
+        focusIndex={focus}
+        handleFocus={handleFocus}
+        forwardRef={forwardRef}
         index={i}
         clickHandler={() => handleFocus(i)}
         handleKeyPress={handleKeyPress}

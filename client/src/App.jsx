@@ -30,7 +30,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    inputRef.current.focus();
+    // inputRef.current.focus();
   }, [prevEquations.length]);
 
   const [focus, setFocus] = useState(0);
@@ -83,7 +83,7 @@ const App = () => {
     setPrevEquations(prevEquationsCopy);
     let newClickVal = clicks ? false : true;
     setClicks(newClickVal);
-    // inputRef.current.focus();
+    inputRef.current.focus();
   };
 
   const arrowHandler = (value) => {
@@ -99,6 +99,7 @@ const App = () => {
       inputRef.current.selectionStart = cursorPosition + 1;
       // inputRef.current.selectionEnd = cursorPosition + 2;
     }
+    inputRef.current.focus();
   };
 
   const keyPressHandler = (value) => {
@@ -216,6 +217,7 @@ const App = () => {
     } else {
       setPrevEquations(prevEquationsCopy);
     }
+    inputRef.current.focus();
   };
 
   const containerTheme = `background-${theme}`;
