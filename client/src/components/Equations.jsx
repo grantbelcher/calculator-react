@@ -22,6 +22,7 @@ function Equations({
   handleFocus,
   focus,
   inputRef,
+  handleReturn,
 }) {
   let equationComponents = prevEquations.map((equation, i) => {
     const { expression, output, forwardRef, carrotIndex } = equation;
@@ -33,6 +34,7 @@ function Equations({
           index={i}
           clickHandler={() => handleFocus(i)}
           handleKeyPress={handleKeyPress}
+          handleReturn={handleReturn}
           expression={expression}
           output={output}
           forwardRef={forwardRef}
@@ -55,6 +57,7 @@ function Equations({
         index={i}
         clickHandler={() => handleFocus(i)}
         handleKeyPress={handleKeyPress}
+        handleReturn={handleReturn}
         expression={expression}
         output={output}
         forwadRef={false}

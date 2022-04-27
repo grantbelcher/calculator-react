@@ -8,13 +8,21 @@ function Equation({
   handleFocus,
   index,
   clickHandler,
+  handleReturn,
   handleKeyPress,
   expression,
   output,
   forwardRef,
   inputRef,
 }) {
-  const handleArrows = (key) => {
+  const handleKeyboard = (key) => {
+    ///// THIS HANDLES RETURN, SEPARATE FUNCTIONS
+
+    // if Enter is pressed, a new blank equation will be generated ONLY IF NECESSARY
+    if (key === "Enter" && index === 0) {
+      handleReturn();
+    }
+
     if (key === "ArrowUp") {
       if (index < finalIndex) {
         handleFocus(focusIndex + 1);
@@ -65,7 +73,7 @@ function Equation({
         type="text"
         className={`expression ${themeClass}`}
         onChange={(e) => handleKeyPress(e.target.value)}
-        onKeyDown={(e) => handleArrows(e.key)}
+        onKeyDown={(e) => handleKeyboard(e.key)}
         value={expression}
       />
       <div className="output-container w3-container">{outputDisplay}</div>

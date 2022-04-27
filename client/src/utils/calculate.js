@@ -1,8 +1,6 @@
 import { evaluateNastyEquationWithPi } from "./reformatTermWithPi";
 import { reformatAllTrig } from "./reformatTrigFunction";
 
-console.log(reformatAllTrig, "yoo");
-
 export function calculate(string) {
   let output;
   // check if string is a single number

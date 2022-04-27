@@ -64,8 +64,6 @@ function reformatTermsWithPi(string) {
 
 let equation = "23π + π + 22 - 2π3 + ππ + 23π2443ππ4π23 + ππ3 + 2ππ + ππ3ππ23";
 
-console.log(reformatTermsWithPi("22"));
-
 export function evaluateNastyEquationWithPi(eq) {
   // split eq based on operators
   const componentsOfEquation = eq.split(" ");

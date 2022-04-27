@@ -284,6 +284,7 @@ const App = () => {
         handleFocus={focusHandler}
         inputRef={inputRef}
         focus={focus}
+        handleReturn={returnCurrentEquation}
       />
       <div className={`calculator-api ${calcTheme}`}>
         <Options clearEquations={clearEquations} clearAll={shouldClearAll} />
