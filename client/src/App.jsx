@@ -54,7 +54,7 @@ const App = () => {
     };
 
     // set the new carrot/cursor position of focused input when a button is clickd
-    // removes the wierd highlighting bug
+    // removes the wierd highlighting bug when editing an expression with buttons
     inputRef.current.selectionStart = currentEquationCopy.carrotIndex + 1;
     inputRef.current.selectionEnd = currentEquationCopy.carrotIndex + 1;
   }, [clicks]);
@@ -189,19 +189,31 @@ const App = () => {
     console.log(expression);
   };
 
+  const refocusOnIndex = (index) => {
+    console.log(inputRef.current, index);
+    inputRef.current.focus();
+    inputRef.current.selectionStart = index;
+  };
+
   const handleBackspace = () => {
     let currentEquationCopy = {
       ...prevEquations[focus],
     };
 
+    let cursorIndex = inputRef.current.selectionStart;
+
     const { expression: oldExpression } = currentEquationCopy;
 
-    const updatedExpression = oldExpression.slice(0, oldExpression.length - 1);
+    const segmentBeforeCursor = oldExpression.slice(0, cursorIndex - 1);
+    const segmentAfterCursor = oldExpression.slice(cursorIndex);
+
+    const updatedExpression = segmentBeforeCursor + segmentAfterCursor;
 
     const output = calculate(updatedExpression);
     currentEquationCopy = {
       ...currentEquationCopy,
       expression: updatedExpression,
+      carrotIndex: cursorIndex - 2,
       output,
     };
     let copy = [...prevEquations];
@@ -216,7 +228,9 @@ const App = () => {
       ...newCopyAfterIndex,
     ];
     setPrevEquations(prevEquationsCopy);
+    let newClickVal = clicks ? false : true;
     inputRef.current.focus();
+    setClicks(newClickVal);
   };
 
   const returnCurrentEquation = () => {
