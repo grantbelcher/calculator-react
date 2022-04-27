@@ -32,7 +32,10 @@ const App = () => {
   }, []);
 
   useEffect(() => {
+    // focus on referenced input whenever focus state changes (up and down arrows)
     inputRef.current.focus();
+    // move cursor to the end of referenced input when new input is focused
+    inputRef.current.selectionStart = inputRef.current.value.length + 1;
   }, [focus]);
 
   useEffect(() => {
