@@ -24,7 +24,7 @@ function Equations({
   inputRef,
 }) {
   let equationComponents = prevEquations.map((equation, i) => {
-    const { expression, output, forwardRef } = equation;
+    const { expression, output, forwardRef, carrotIndex } = equation;
 
     if (i === focus) {
       return (

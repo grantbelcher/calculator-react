@@ -15,7 +15,6 @@ function Equation({
   const themeClass = `eq-${theme}`;
   // conditionally create className string to control when animation runs
   let animationClass = focus === true ? "w3-animate-opacity" : "";
-
   let outputDisplay;
   if (output === null || output === "") {
     outputDisplay = "";

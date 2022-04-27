@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
+
 import { ThemeContext } from "./context/theme";
 import Test from "./components/Test/Test";
 import Trig from "./components/Trig/Trig";
@@ -18,8 +19,11 @@ const App = () => {
       expression: "",
       output: "",
       forwardRef: inputRef,
+      carrotIndex: 0,
     },
   ]);
+
+  const [clicks, setClicks] = useState(false);
 
   useEffect(() => {
     inputRef.current.focus();
@@ -35,6 +39,13 @@ const App = () => {
   const focusHandler = (indexOfEquation) => {
     setFocus(indexOfEquation);
   };
+
+  useEffect(() => {
+    let currentEquationCopy = {
+      ...prevEquations[focus],
+    };
+    inputRef.current.selectionStart = currentEquationCopy.carrotIndex + 1;
+  }, [clicks]);
 
   const clickHandler = (value) => {
     let currentEquationCopy = {
@@ -56,6 +67,7 @@ const App = () => {
       ...currentEquationCopy,
       expression: updatedExpression,
       output,
+      carrotIndex: cursorIndex,
     };
     let copy = [...prevEquations];
     let newCopyAfterIndex = copy.slice(focus + 1, copy.length);
@@ -69,7 +81,9 @@ const App = () => {
       ...newCopyAfterIndex,
     ];
     setPrevEquations(prevEquationsCopy);
-    inputRef.current.focus();
+    let newClickVal = clicks ? false : true;
+    setClicks(newClickVal);
+    // inputRef.current.focus();
   };
 
   const arrowHandler = (value) => {
@@ -77,7 +91,7 @@ const App = () => {
       inputRef.current.focus();
       const cursorPosition = inputRef.current.selectionStart;
       inputRef.current.selectionStart = cursorPosition - 1;
-      inputRef.current.selectionEnd = cursorPosition;
+      inputRef.current.selectionEnd = cursorPosition - 1;
     }
     if (value === "right") {
       inputRef.current.focus();
@@ -194,6 +208,7 @@ const App = () => {
       expression: "",
       output: "",
       forwardRef: inputRef,
+      carrotIndex: 0,
     };
     const prevEquationsCopy = [...prevEquations];
     if (focus === 0) {
