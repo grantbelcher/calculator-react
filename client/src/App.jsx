@@ -249,6 +249,14 @@ const App = () => {
     inputRef.current.focus();
   };
 
+  //
+  const shouldClearAll =
+    prevEquations.length > 1 && prevEquations[focus].expression.length === 0;
+
+  const clearEquations = (value) => {
+    console.log(value, "clear button clicked");
+  };
+
   const containerTheme = `background-${theme}`;
   const calcTheme = `buttons-bg-${theme}`;
 
@@ -263,7 +271,7 @@ const App = () => {
         focus={focus}
       />
       <div className={`calculator-api ${calcTheme}`}>
-        <Options />
+        <Options clearEquations={clearEquations} clearAll={shouldClearAll} />
         <div className="bottom-section">
           <Trig clickHandler={clickHandler} />
           <GridCenter clickHandler={clickHandler} />

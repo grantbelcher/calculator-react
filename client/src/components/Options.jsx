@@ -1,13 +1,17 @@
 import React, { useContext } from "react";
 import { ThemeContext } from "../context/theme";
 
-function Options() {
+function Options({ clearEquations, clearAll }) {
   const { theme, toggleTheme } = useContext(ThemeContext);
-  const buttonText = theme === "light" ? "dark" : "light";
+  const themeButtonText = theme === "light" ? "dark" : "light";
+  const clearButtonText = clearAll ? "Clear All" : "Clear";
   return (
     <div className="options">
       <button className={`operation-button-${theme}`} onClick={toggleTheme}>
-        {buttonText} theme
+        {themeButtonText} theme
+      </button>
+      <button className={`operation-button-${theme}`} onClick={toggleTheme}>
+        {clearButtonText}
       </button>
     </div>
   );
