@@ -38,9 +38,9 @@ const App = () => {
     inputRef.current.selectionStart = inputRef.current.value.length + 1;
   }, [focus]);
 
-  useEffect(() => {
-    // inputRef.current.focus();
-  }, [prevEquations.length]);
+  // useEffect(() => {
+  //   // inputRef.current.focus();
+  // }, [prevEquations.length]);
 
   // const [currentEquation, setCurrentEquation] = useState(prevEquations[focus]);
 
@@ -52,7 +52,11 @@ const App = () => {
     let currentEquationCopy = {
       ...prevEquations[focus],
     };
+
+    // set the new carrot/cursor position of focused input when a button is clickd
+    // removes the wierd highlighting bug
     inputRef.current.selectionStart = currentEquationCopy.carrotIndex + 1;
+    inputRef.current.selectionEnd = currentEquationCopy.carrotIndex + 1;
   }, [clicks]);
 
   const clickHandler = (value) => {
@@ -92,6 +96,9 @@ const App = () => {
     let newClickVal = clicks ? false : true;
     setClicks(newClickVal);
     inputRef.current.focus();
+
+    // inputRef.current.selectionStart = cursorIndex;
+    // inputRef.current.selectionEnd = cursorIndex;
   };
 
   const arrowHandler = (value) => {
