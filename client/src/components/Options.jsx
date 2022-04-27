@@ -10,7 +10,10 @@ function Options({ clearEquations, clearAll }) {
       <button className={`operation-button-${theme}`} onClick={toggleTheme}>
         {themeButtonText} theme
       </button>
-      <button className={`operation-button-${theme}`} onClick={toggleTheme}>
+      <button
+        className={`operation-button-${theme}`}
+        onClick={() => clearEquations(clearAll)}
+      >
         {clearButtonText}
       </button>
     </div>

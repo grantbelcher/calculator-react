@@ -253,8 +253,13 @@ const App = () => {
   const shouldClearAll =
     prevEquations.length > 1 && prevEquations[focus].expression.length === 0;
 
-  const clearEquations = (value) => {
-    console.log(value, "clear button clicked");
+  const clearEquations = () => {
+    if (shouldClearAll) {
+      console.log();
+    } else {
+      // set value of input to be blank
+      keyPressHandler("");
+    }
   };
 
   const containerTheme = `background-${theme}`;
