@@ -42,10 +42,13 @@ const App = () => {
     };
 
     const cursorIndex = inputRef.current.selectionStart;
-    console.log(cursorIndex, "index here");
+
     const updatedExpression =
+      // the segment of expression BEFORE CURSOR POSITION
       currentEquationCopy.expression.slice(0, cursorIndex) +
+      // VALUE TO BE INSERTED
       value +
+      // the segment of expression AFTER CURSOR POSITION
       currentEquationCopy.expression.slice(cursorIndex);
 
     const output = calculate(updatedExpression);
@@ -70,12 +73,12 @@ const App = () => {
   };
 
   const arrowHandler = (value) => {
-    // if (value === "left") {
-    //   inputRef.current.focus();
-    //   const cursorPosition = inputRef.current.selectionStart;
-    //   inputRef.current.selectionStart = cursorPosition - 1;
-    //   inputRef.current.selectionEnd = cursorPosition;
-    // }
+    if (value === "left") {
+      inputRef.current.focus();
+      const cursorPosition = inputRef.current.selectionStart;
+      inputRef.current.selectionStart = cursorPosition - 1;
+      inputRef.current.selectionEnd = cursorPosition;
+    }
   };
 
   const keyPressHandler = (value) => {
