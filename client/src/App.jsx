@@ -25,15 +25,20 @@ const App = () => {
 
   const [clicks, setClicks] = useState(false);
 
+  const [focus, setFocus] = useState(0);
+
   useEffect(() => {
     inputRef.current.focus();
   }, []);
 
   useEffect(() => {
+    inputRef.current.focus();
+  }, [focus]);
+
+  useEffect(() => {
     // inputRef.current.focus();
   }, [prevEquations.length]);
 
-  const [focus, setFocus] = useState(0);
   // const [currentEquation, setCurrentEquation] = useState(prevEquations[focus]);
 
   const focusHandler = (indexOfEquation) => {
@@ -146,7 +151,7 @@ const App = () => {
     let currentEquationCopy = {
       ...prevEquations[focus],
       expression: value,
-
+      //// track carrot index
       output,
     };
 

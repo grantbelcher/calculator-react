@@ -38,6 +38,7 @@ function Equations({
           forwardRef={forwardRef}
           focus={true}
           focusIndex={focus}
+          finalIndex={prevEquations.length - 1}
           handleFocus={handleFocus}
           inputRef={inputRef}
         />
@@ -48,6 +49,7 @@ function Equations({
       <Equation
         focus={false}
         focusIndex={focus}
+        finalIndex={prevEquations.length - 1}
         handleFocus={handleFocus}
         forwardRef={forwardRef}
         index={i}

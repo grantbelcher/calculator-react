@@ -4,6 +4,7 @@ import { ThemeContext } from "../context/theme";
 function Equation({
   focus,
   focusIndex,
+  finalIndex,
   handleFocus,
   index,
   clickHandler,
@@ -15,7 +16,16 @@ function Equation({
 }) {
   const handleArrows = (key) => {
     if (key === "ArrowUp") {
-      // handleFocus(focusIndex + 1);
+      if (index < finalIndex) {
+        handleFocus(focusIndex + 1);
+        // forwardRef.current.focus();
+      }
+    }
+    if (key === "ArrowDown") {
+      if (index > 0) {
+        handleFocus(focusIndex - 1);
+        // forwardRef.current.focus();
+      }
     }
   };
 
