@@ -79,6 +79,12 @@ const App = () => {
       inputRef.current.selectionStart = cursorPosition - 1;
       inputRef.current.selectionEnd = cursorPosition;
     }
+    if (value === "right") {
+      inputRef.current.focus();
+      const cursorPosition = inputRef.current.selectionStart;
+      inputRef.current.selectionStart = cursorPosition + 1;
+      // inputRef.current.selectionEnd = cursorPosition + 2;
+    }
   };
 
   const keyPressHandler = (value) => {
