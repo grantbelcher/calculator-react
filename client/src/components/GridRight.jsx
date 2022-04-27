@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { ThemeContext } from "../context/theme";
 
-function GridRight({ returnEquation, handleBackspace }) {
+function GridRight({ returnEquation, handleBackspace, arrowHandler }) {
   const { theme } = useContext(ThemeContext);
 
   const operationTheme = `button operation-button-${theme}`;
@@ -19,12 +19,12 @@ function GridRight({ returnEquation, handleBackspace }) {
         </div>
       </div>
       <div className="right-row top">
-        <div className={numberTheme}>
+        <button className={numberTheme} onClick={() => arrowHandler("left")}>
           <i className="material-icons">arrow_back</i>
-        </div>
-        <div className={numberTheme}>
+        </button>
+        <button className={numberTheme} onClick={() => arrowHandler("right")}>
           <i className="material-icons">arrow_forward</i>
-        </div>
+        </button>
       </div>
       <button
         className={`right-row bottom ${numberTheme}`}

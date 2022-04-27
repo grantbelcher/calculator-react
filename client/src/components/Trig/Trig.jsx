@@ -12,10 +12,10 @@ function Trig({ clickHandler }) {
       <button className={buttonTheme}>
         x<sup>b</sup>
       </button>
-      <button className={buttonTheme}>| a |</button>
+      <button className={buttonTheme}>|a|</button>
       <button className={buttonTheme}>√ </button>
       <button className={buttonTheme}>
-        <sup>n</sup>√
+        <sup>n</sup>&radic;
       </button>
       <button
         className={buttonTheme}

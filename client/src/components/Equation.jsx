@@ -9,6 +9,7 @@ function Equation({
   expression,
   output,
   forwardRef,
+  inputRef,
 }) {
   const { theme } = useContext(ThemeContext);
   const themeClass = `eq-${theme}`;
@@ -47,7 +48,6 @@ function Equation({
         type="text"
         className={`expression ${themeClass}`}
         onChange={(e) => handleKeyPress(e.target.value)}
-        // onKeyPress={(e) => console.log(e.key, "look here")}
         value={expression}
       />
       <div className="output-container w3-container">{outputDisplay}</div>

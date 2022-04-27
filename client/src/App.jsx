@@ -40,10 +40,18 @@ const App = () => {
     let currentEquationCopy = {
       ...prevEquations[focus],
     };
-    const output = calculate(currentEquationCopy.expression + value);
+
+    const cursorIndex = inputRef.current.selectionStart;
+    console.log(cursorIndex, "index here");
+    const updatedExpression =
+      currentEquationCopy.expression.slice(0, cursorIndex) +
+      value +
+      currentEquationCopy.expression.slice(cursorIndex);
+
+    const output = calculate(updatedExpression);
     currentEquationCopy = {
       ...currentEquationCopy,
-      expression: currentEquationCopy.expression + value,
+      expression: updatedExpression,
       output,
     };
     let copy = [...prevEquations];
@@ -59,6 +67,15 @@ const App = () => {
     ];
     setPrevEquations(prevEquationsCopy);
     inputRef.current.focus();
+  };
+
+  const arrowHandler = (value) => {
+    // if (value === "left") {
+    //   inputRef.current.focus();
+    //   const cursorPosition = inputRef.current.selectionStart;
+    //   inputRef.current.selectionStart = cursorPosition - 1;
+    //   inputRef.current.selectionEnd = cursorPosition;
+    // }
   };
 
   const keyPressHandler = (value) => {
@@ -197,6 +214,7 @@ const App = () => {
           <GridCenter clickHandler={clickHandler} />
           <GridRight
             handleBackspace={handleBackspace}
+            arrowHandler={arrowHandler}
             returnEquation={returnCurrentEquation}
           />
         </div>

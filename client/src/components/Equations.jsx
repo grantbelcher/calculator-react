@@ -37,6 +37,7 @@ function Equations({
           output={output}
           forwardRef={forwardRef}
           focus={true}
+          inputRef={inputRef}
         />
       );
     }
@@ -50,21 +51,10 @@ function Equations({
         expression={expression}
         output={output}
         forwadRef={false}
+        inputRef={null}
       />
     );
   });
-
-  // const newEquation = (
-  //   <div className="equation-container">
-  //     <MemoizedEquation
-  //       focus={true}
-  //       clickHandler={handleFocus}
-  //       equation={currentEquation}
-  //       handleKeyPress={handleKeyPress}
-  //     />
-  //     {equationComponents}
-  //   </div>
-  // );
 
   equationComponents = [...equationComponents];
 
