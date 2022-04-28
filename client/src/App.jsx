@@ -54,12 +54,24 @@ const App = () => {
     let currentEquationCopy = {
       ...prevEquations[focus],
     };
-    // set the new carrot/cursor position of focused input when a button is clickd
-    // removes the wierd highlighting bug when editing an expression with buttons
-    inputRef.current.selectionStart =
-      currentEquationCopy.carrotIndex + indexChange;
-    inputRef.current.selectionEnd =
-      currentEquationCopy.carrotIndex + indexChange;
+
+    // IF TRIG FUNCTION WAS ENTERED
+    if (indexChange > 4) {
+      let newIndex = indexChange - 1;
+      console.log(newIndex, "TRIG CLICKED");
+      inputRef.current.selectionStart =
+        currentEquationCopy.carrotIndex + newIndex;
+      inputRef.current.selectionEnd =
+        currentEquationCopy.carrotIndex + newIndex;
+    } else {
+      console.log("fuck");
+      // set the new carrot/cursor position of focused input when a button is clickd
+      // removes the wierd highlighting bug when editing an expression with buttons
+      inputRef.current.selectionStart =
+        currentEquationCopy.carrotIndex + indexChange;
+      inputRef.current.selectionEnd =
+        currentEquationCopy.carrotIndex + indexChange;
+    }
   };
 
   useEffect(() => {
