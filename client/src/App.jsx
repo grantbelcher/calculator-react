@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
-
+import usePrevious from "./utils/usePrevious";
 import { ThemeContext } from "./context/theme";
 import Test from "./components/Test/Test";
 import Trig from "./components/Trig/Trig";
@@ -23,7 +23,7 @@ const App = () => {
     },
   ]);
 
-  const [clicks, setClicks] = useState(false);
+  const [clicks, setClicks] = useState(0);
 
   const [focus, setFocus] = useState(0);
 
@@ -48,15 +48,24 @@ const App = () => {
     setFocus(indexOfEquation);
   };
 
-  useEffect(() => {
+  const prevCount = usePrevious(clicks);
+
+  const updateCursorIndex = (indexChange) => {
     let currentEquationCopy = {
       ...prevEquations[focus],
     };
-
     // set the new carrot/cursor position of focused input when a button is clickd
     // removes the wierd highlighting bug when editing an expression with buttons
-    inputRef.current.selectionStart = currentEquationCopy.carrotIndex + 1;
-    inputRef.current.selectionEnd = currentEquationCopy.carrotIndex + 1;
+    inputRef.current.selectionStart =
+      currentEquationCopy.carrotIndex + indexChange;
+    inputRef.current.selectionEnd =
+      currentEquationCopy.carrotIndex + indexChange;
+  };
+
+  useEffect(() => {
+    console.log(clicks, prevCount, "callback");
+    const indexChange = clicks - prevCount;
+    updateCursorIndex(indexChange);
   }, [clicks]);
 
   const clickHandler = (value) => {
@@ -93,8 +102,8 @@ const App = () => {
       ...newCopyAfterIndex,
     ];
     setPrevEquations(prevEquationsCopy);
-    let newClickVal = clicks ? false : true;
-    setClicks(newClickVal);
+    let newClickVal = value.length;
+    setClicks(clicks + newClickVal);
     inputRef.current.focus();
 
     // inputRef.current.selectionStart = cursorIndex;
