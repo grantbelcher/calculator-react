@@ -27,21 +27,21 @@ function Trig({ clickHandler }) {
       <button
         className={buttonTheme}
         value="sin"
-        onClick={() => clickHandler("sin(")}
+        onClick={() => clickHandler("sin()")}
       >
         sin
       </button>
       <button
         className={buttonTheme}
         value="cos"
-        onClick={() => clickHandler("cos(")}
+        onClick={() => clickHandler("cos()")}
       >
         cos
       </button>
       <button
         className={buttonTheme}
         value="tan"
-        onClick={() => clickHandler("tan(")}
+        onClick={() => clickHandler("tan()")}
       >
         tan
       </button>
