@@ -35,6 +35,7 @@ const App = () => {
     // focus on referenced input whenever focus state changes (up and down arrows)
     inputRef.current.focus();
     // move cursor to the end of referenced input when new input is focused
+    console.log(inputRef.current.value.length + 1, "FOCUS USE EFFECT");
     inputRef.current.selectionStart = inputRef.current.value.length + 1;
   }, [focus]);
 
@@ -50,31 +51,24 @@ const App = () => {
 
   const prevCount = usePrevious(clicks);
 
-  const updateCursorIndex = (indexChange) => {
-    let currentEquationCopy = {
-      ...prevEquations[focus],
-    };
+  useEffect(() => {
+    // do something with absolute value instead of subtraction
+    // const indexChange = clicks - prevCount;
+    // console.log(indexChange, "before updating index change IN USE EFFECT");
+    // updateCursorIndex(indexChange);
 
     // IF TRIG FUNCTION WAS ENTERED
-    if (indexChange > 4) {
-      let newIndex = indexChange - 1;
-      inputRef.current.selectionStart =
-        currentEquationCopy.carrotIndex + newIndex;
-      inputRef.current.selectionEnd =
-        currentEquationCopy.carrotIndex + newIndex;
-    } else {
-      // set the new carrot/cursor position of focused input when a button is clickd
-      // removes the wierd highlighting bug when editing an expression with buttons
-      inputRef.current.selectionStart =
-        currentEquationCopy.carrotIndex + indexChange;
-      inputRef.current.selectionEnd =
-        currentEquationCopy.carrotIndex + indexChange;
-    }
-  };
+    // if (indexChange === 5) {
+    //   inputRef.current.selectionStart = clicks - 1;
+    //   inputRef.current.selectionEnd = clicks - 1;
+    //   setClicks(clicks - 1);
+    // } else {
+    //   inputRef.current.selectionStart = clicks;
+    //   inputRef.current.selectionEnd = clicks;
+    // }
 
-  useEffect(() => {
-    const indexChange = clicks - prevCount;
-    updateCursorIndex(indexChange);
+    inputRef.current.selectionStart = clicks;
+    inputRef.current.selectionEnd = clicks;
   }, [clicks]);
 
   const clickHandler = (value) => {
@@ -112,7 +106,13 @@ const App = () => {
     ];
     setPrevEquations(prevEquationsCopy);
     let newClickVal = value.length;
-    setClicks(clicks + newClickVal);
+
+    if (newClickVal === 5) {
+      setClicks(cursorIndex + newClickVal - 1);
+    } else {
+      setClicks(cursorIndex + newClickVal);
+    }
+
     inputRef.current.focus();
 
     // inputRef.current.selectionStart = cursorIndex;
@@ -214,41 +214,58 @@ const App = () => {
   };
 
   const handleBackspace = () => {
+    // create a copy of focused equation
     let currentEquationCopy = {
       ...prevEquations[focus],
     };
-
+    // determine the cursor position in the focused express
     let cursorIndex = inputRef.current.selectionStart;
+    // if the cursor is at index 0 of the focused expression
+    if (cursorIndex === 0) {
+      // refocus on expression because focus was changed after button click
+      inputRef.current.focus();
+      // reset cursor index to 0 and do nothing else
+      setClicks(0);
+    } else {
+      // make a copy of the expression in focused input
+      const { expression: oldExpression } = currentEquationCopy;
+      // make a copy of the expression up to, but not including the index to delete
+      const segmentBeforeCursor = oldExpression.slice(0, cursorIndex - 1);
+      // make a copy of the expression after the index to delete
+      const segmentAfterCursor = oldExpression.slice(cursorIndex);
+      // combine two copies to update the expression, now excluding the deleted character
+      const updatedExpression = segmentBeforeCursor + segmentAfterCursor;
+      // recalculate with the updated expression
+      const output = calculate(updatedExpression);
+      // update the current equation copy with the updated expression and new output
+      currentEquationCopy = {
+        ...currentEquationCopy,
+        expression: updatedExpression,
+        output,
+      };
+      // make a copy of equation list stored in state
+      let copy = [...prevEquations];
 
-    const { expression: oldExpression } = currentEquationCopy;
+      // make a copy of eqution list up but not including the focused input,
+      let newCopyBeforeIndex = copy.slice(0, focus);
 
-    const segmentBeforeCursor = oldExpression.slice(0, cursorIndex - 1);
-    const segmentAfterCursor = oldExpression.slice(cursorIndex);
+      // make a copy of all equations in equation list after focused input
+      let newCopyAfterIndex = copy.slice(focus + 1, copy.length);
 
-    const updatedExpression = segmentBeforeCursor + segmentAfterCursor;
-
-    const output = calculate(updatedExpression);
-    currentEquationCopy = {
-      ...currentEquationCopy,
-      expression: updatedExpression,
-      carrotIndex: cursorIndex - 2,
-      output,
-    };
-    let copy = [...prevEquations];
-    let newCopyAfterIndex = copy.slice(focus + 1, copy.length);
-
-    let newCopyBeforeIndex = copy.slice(0, focus);
-
-    let prevEquationsCopy;
-    prevEquationsCopy = [
-      ...newCopyBeforeIndex,
-      currentEquationCopy,
-      ...newCopyAfterIndex,
-    ];
-    setPrevEquations(prevEquationsCopy);
-    let newClickVal = clicks ? false : true;
-    inputRef.current.focus();
-    setClicks(newClickVal);
+      // combine the all copied equations and updated equation to make the updated list
+      let prevEquationsCopy;
+      prevEquationsCopy = [
+        ...newCopyBeforeIndex,
+        currentEquationCopy,
+        ...newCopyAfterIndex,
+      ];
+      // update Equation list in state
+      setPrevEquations(prevEquationsCopy);
+      // refocus on current input after focus was lost due to button click
+      inputRef.current.focus();
+      // move the cursor back one index
+      setClicks(cursorIndex - 1);
+    }
   };
 
   const returnCurrentEquation = () => {
