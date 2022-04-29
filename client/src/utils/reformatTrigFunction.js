@@ -31,6 +31,12 @@ function multiplyAfterParenthesis(string) {
       newString += string[i];
     }
   }
+  if (newString[0] === "*") {
+    newString = newString.slice(1);
+  }
+  if (newString[newString.length - 1] === "*") {
+    newString = newString.slice(0, newString.length - 1);
+  }
   return newString;
 }
 
@@ -55,11 +61,16 @@ export function removeExcessMultiplier(string) {
     } else if (arrayOfElements[i][arrayOfElements[i].length - 1] === "*") {
       arrayOfElements = arrayOfElements[i].slice(
         0,
-        arrayOfElements[i].length - 1
+        arrayOfElements[i].length - 2
       );
     } else {
       arrayOfElements[i] = arrayOfElements[i];
     }
+  }
+  if (Array.isArray(arrayOfElements)) {
+    return arrayOfElements.join("");
+  } else {
+    return arrayOfElements;
   }
   return arrayOfElements.join("");
 }
@@ -77,7 +88,8 @@ export function reformatAllTrig(string) {
   // add a '*' after each trig function for automatic multiplication
   expression = multiplyAfterParenthesis(expression);
   // remove excess '*' that will break eval equation
-  let formattedExpression = removeExcessMultiplier(expression);
-  console.log(formattedExpression);
-  return formattedExpression;
+  // let formattedExpression = removeExcessMultiplier(expression);
+  // console.log(formattedExpression);
+  // return formattedExpression;
+  return expression;
 }

@@ -64,7 +64,6 @@ const App = () => {
       inputRef.current.selectionEnd =
         currentEquationCopy.carrotIndex + newIndex;
     } else {
-      console.log("fuck");
       // set the new carrot/cursor position of focused input when a button is clickd
       // removes the wierd highlighting bug when editing an expression with buttons
       inputRef.current.selectionStart =

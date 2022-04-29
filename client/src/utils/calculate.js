@@ -13,6 +13,10 @@ export function calculate(string) {
     string = evaluateNastyEquationWithPi(string);
   }
 
+  if (string.includes("()")) {
+    return "error";
+  }
+
   // check if trig functions are present
   string = reformatAllTrig(string);
 
