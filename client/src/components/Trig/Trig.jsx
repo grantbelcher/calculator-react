@@ -9,7 +9,7 @@ function Trig({ clickHandler, handleExponents }) {
       <button className={buttonTheme} onClick={() => clickHandler("²")}>
         x<sup>2</sup>
       </button>
-      <button className={buttonTheme} onClick={() => handleExponents()}>
+      <button className={buttonTheme} onClick={handleExponents}>
         x<sup>b</sup>
       </button>
       <button className={buttonTheme}>|a|</button>

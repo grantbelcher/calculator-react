@@ -8,6 +8,7 @@ import GridRight from "./components/GridRight";
 import Options from "./components/Options";
 import Equations from "./components/Equations";
 import { calculate } from "./utils/calculate";
+import { handleExponents } from "./utils/handleExponents";
 
 const App = () => {
   const { theme } = useContext(ThemeContext);
@@ -76,6 +77,36 @@ const App = () => {
     inputRef.current.selectionEnd = clicks;
   }, [clicks]);
 
+  // this is passed to handle exponents as an argument
+  let currentEquation = prevEquations[focus];
+
+  // d
+  // asdsadas
+  // da
+  // sdsa
+  // dsad
+  // dda
+  // dsa
+  // dsds
+  // sadsa
+  // dsdsadas
+  // asd
+  // adss
+  // adadsa
+  // aadsadsadasd
+  // dasdsad
+  // saddsadsdasda
+  // asdad
+  // ssadadsadassd
+  // sads
+  // ad
+  // sd
+  // sadasdsdad
+  // asdad
+  // ssadadsaadads
+  // dasds
+  // adasd
+
   const clickHandler = (value) => {
     let currentEquationCopy = {
       ...prevEquations[focus],
@@ -123,6 +154,33 @@ const App = () => {
     // inputRef.current.selectionStart = cursorIndex;
     // inputRef.current.selectionEnd = cursorIndex;
   };
+
+  // d
+  // asdsadas
+  // da
+  // sdsa
+  // dsad
+  // dda
+  // dsa
+  // dsds
+  // sadsa
+  // dsdsadas
+  // asd
+  // adss
+  // adadsa
+  // aadsadsadasd
+  // dasdsad
+  // saddsadsdasda
+  // asdad
+  // ssadadsadassd
+  // sads
+  // ad
+  // sd
+  // sadasdsdad
+  // asdad
+  // ssadadsaadads
+  // dasds
+  // adasd
 
   const arrowHandler = (value) => {
     if (value === "left") {
@@ -217,89 +275,6 @@ const App = () => {
     inputRef.current.focus();
     inputRef.current.selectionStart = index;
   };
-
-  // d
-  // asdsadas
-  // da
-  // sdsa
-  // dsad
-  // dda
-  // dsa
-  // dsds
-  // sadsa
-  // dsdsadas
-  // asd
-  // adss
-  // adadsa
-  // aadsadsadasd
-  // dasdsad
-  // saddsadsdasda
-  // asdad
-  // ssadadsadassd
-  // sads
-  // ad
-  // sd
-  // sadasdsdad
-  // asdad
-  // ssadadsaadads
-  // dasds
-  // adasd
-
-  const handleExponents = (value) => {
-    // obtain a copy of the focused equation's expression
-    let { expression } = prevEquations[focus];
-    // find cursor position
-    const cursorIndex = inputRef.current.selectionStart;
-    // find the char before cursor in focused expression
-    const lastChar = expression[cursorIndex - 1];
-    // if expression is empty, or previous value is a space
-    if (expression.length === 0 || lastChar === " " || !lastChar) {
-      // exponent buttons are disabled
-      console.log("disable button");
-    } else {
-      console.log(
-        {
-          inExponentMode: true,
-          exponentStart: cursorIndex - 1,
-        },
-        "check here"
-      );
-
-      setExponential({
-        inExponentMode: true,
-        exponentStart: cursorIndex - 1,
-      });
-    }
-
-    inputRef.current.focus();
-  };
-
-  // d
-  // asdsadas
-  // da
-  // sdsa
-  // dsad
-  // dda
-  // dsa
-  // dsds
-  // sadsa
-  // dsdsadas
-  // asd
-  // adss
-  // adadsa
-  // aadsadsadasd
-  // dasdsad
-  // saddsadsdasda
-  // asdad
-  // ssadadsadassd
-  // sads
-  // ad
-  // sd
-  // sadasdsdad
-  // asdad
-  // ssadadsaadads
-  // dasds
-  // adasd
 
   const handleBackspace = () => {
     // create a copy of focused equation
@@ -412,7 +387,12 @@ const App = () => {
       <div className={`calculator-api ${calcTheme}`}>
         <Options clearEquations={clearEquations} clearAll={shouldClearAll} />
         <div className="bottom-section">
-          <Trig clickHandler={clickHandler} handleExponents={handleExponents} />
+          <Trig
+            clickHandler={clickHandler}
+            handleExponents={() =>
+              handleExponents(currentEquation, inputRef, setExponential)
+            }
+          />
           <GridCenter clickHandler={clickHandler} />
           <GridRight
             handleBackspace={handleBackspace}
