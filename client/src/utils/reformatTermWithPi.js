@@ -27,7 +27,37 @@ function replacePi(string, indexes) {
     } else {
       // instead of adding the character pi, we will add the javascript representation that the eval function can read
       // we will also surround it with multiplication signs to automatically multiply it with the surounding terms
-      newString.push("*Math.PI*");
+      if (
+        (string[i - 1] === "(" && string[i + 1] === ")") ||
+        (string[i - 1] === "(" && string[i + 1] === "*") ||
+        (string[i - 1] === "(" && string[i + 1] === "/") ||
+        (string[i - 1] === "(" && string[i + 1] === "+") ||
+        (string[i - 1] === "(" && string[i + 1] === "-") ||
+        (string[i - 1] === "(" && string[i + 1] === " ") ||
+        // BELOW CONDITION IS A FAILSAFE.... !sting[i + 1] is the same as string[i + 1] === " "
+        (string[i - 1] === "(" && !string[i + 1])
+      ) {
+        newString.push("Math.PI");
+      } else if (
+        string[i + 1] === ")" ||
+        string[i + 1] === "+" ||
+        string[i + 1] === "-" ||
+        string[i + 1] === "*" ||
+        string[i + 1] === "/"
+      ) {
+        newString.push("*Math.PI");
+      } else if (
+        string[i + 1] === ")" ||
+        string[i + 1] === "+" ||
+        string[i + 1] === "-" ||
+        string[i + 1] === "*" ||
+        string[i + 1] === "/"
+      ) {
+        newString.push("Math.PI*");
+      } else {
+        console.log(string[i - 1], string, "look here");
+        newString.push("*Math.PI*");
+      }
     }
   }
   // return the array of all elements of the term, that we will join together into the appropriate format

@@ -58,7 +58,6 @@ const App = () => {
     // IF TRIG FUNCTION WAS ENTERED
     if (indexChange > 4) {
       let newIndex = indexChange - 1;
-      console.log(newIndex, "TRIG CLICKED");
       inputRef.current.selectionStart =
         currentEquationCopy.carrotIndex + newIndex;
       inputRef.current.selectionEnd =
@@ -74,7 +73,6 @@ const App = () => {
   };
 
   useEffect(() => {
-    console.log(clicks, prevCount, "callback");
     const indexChange = clicks - prevCount;
     updateCursorIndex(indexChange);
   }, [clicks]);
