@@ -55,7 +55,6 @@ function replacePi(string, indexes) {
       ) {
         newString.push("Math.PI*");
       } else {
-        console.log(string[i - 1], string, "look here");
         newString.push("*Math.PI*");
       }
     }

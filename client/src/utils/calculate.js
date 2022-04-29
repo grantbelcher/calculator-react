@@ -1,5 +1,6 @@
 import { evaluateNastyEquationWithPi } from "./reformatTermWithPi";
 import { reformatAllTrig } from "./reformatTrigFunction";
+import { finalReformat } from "./finalReformat";
 
 export function calculate(string) {
   let output;
@@ -19,6 +20,12 @@ export function calculate(string) {
 
   // check if trig functions are present
   string = reformatAllTrig(string);
+
+  console.log(string, "LOOK HERE IN CALCULATE");
+
+  string = finalReformat(string);
+
+  console.log(string, "after FINAL REFORMAT");
 
   if (stringIsNaN) {
     // evaluate

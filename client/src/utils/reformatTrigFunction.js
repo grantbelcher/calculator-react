@@ -91,5 +91,6 @@ export function reformatAllTrig(string) {
   // let formattedExpression = removeExcessMultiplier(expression);
   // console.log(formattedExpression);
   // return formattedExpression;
+  console.log(expression, "look here");
   return expression;
 }
