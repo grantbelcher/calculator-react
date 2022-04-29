@@ -36,7 +36,7 @@ const App = () => {
     inputRef.current.focus();
     // move cursor to the end of referenced input when new input is focused
     console.log(inputRef.current.value.length + 1, "FOCUS USE EFFECT");
-    inputRef.current.selectionStart = inputRef.current.value.length + 1;
+    // inputRef.current.selectionStart = inputRef.current.value.length + 1;
   }, [focus]);
 
   // useEffect(() => {
@@ -213,6 +213,64 @@ const App = () => {
     inputRef.current.selectionStart = index;
   };
 
+  // d
+  // asdsadas
+  // da
+  // sdsa
+  // dsad
+  // dda
+  // dsa
+  // dsds
+  // sadsa
+  // dsdsadas
+  // asd
+  // adss
+  // adadsa
+  // aadsadsadasd
+  // dasdsad
+  // saddsadsdasda
+  // asdad
+  // ssadadsadassd
+  // sads
+  // ad
+  // sd
+  // sadasdsdad
+  // asdad
+  // ssadadsaadads
+  // dasds
+  // adasd
+
+  const handleExponents = (value) => {
+    console.log("exponent handler");
+  };
+
+  // d
+  // asdsadas
+  // da
+  // sdsa
+  // dsad
+  // dda
+  // dsa
+  // dsds
+  // sadsa
+  // dsdsadas
+  // asd
+  // adss
+  // adadsa
+  // aadsadsadasd
+  // dasdsad
+  // saddsadsdasda
+  // asdad
+  // ssadadsadassd
+  // sads
+  // ad
+  // sd
+  // sadasdsdad
+  // asdad
+  // ssadadsaadads
+  // dasds
+  // adasd
+
   const handleBackspace = () => {
     // create a copy of focused equation
     let currentEquationCopy = {
@@ -324,7 +382,7 @@ const App = () => {
       <div className={`calculator-api ${calcTheme}`}>
         <Options clearEquations={clearEquations} clearAll={shouldClearAll} />
         <div className="bottom-section">
-          <Trig clickHandler={clickHandler} />
+          <Trig clickHandler={clickHandler} handleExponents={handleExponents} />
           <GridCenter clickHandler={clickHandler} />
           <GridRight
             handleBackspace={handleBackspace}
