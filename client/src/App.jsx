@@ -27,6 +27,11 @@ const App = () => {
 
   const [focus, setFocus] = useState(0);
 
+  const [exponential, setExponential] = useState({
+    inExponentMode: false,
+    exponentStart: null,
+  });
+
   useEffect(() => {
     inputRef.current.focus();
   }, []);
@@ -241,7 +246,32 @@ const App = () => {
   // adasd
 
   const handleExponents = (value) => {
-    console.log("exponent handler");
+    // obtain a copy of the focused equation's expression
+    let { expression } = prevEquations[focus];
+    // find cursor position
+    const cursorIndex = inputRef.current.selectionStart;
+    // find the char before cursor in focused expression
+    const lastChar = expression[cursorIndex - 1];
+    // if expression is empty, or previous value is a space
+    if (expression.length === 0 || lastChar === " " || !lastChar) {
+      // exponent buttons are disabled
+      console.log("disable button");
+    } else {
+      console.log(
+        {
+          inExponentMode: true,
+          exponentStart: cursorIndex - 1,
+        },
+        "check here"
+      );
+
+      setExponential({
+        inExponentMode: true,
+        exponentStart: cursorIndex - 1,
+      });
+    }
+
+    inputRef.current.focus();
   };
 
   // d
