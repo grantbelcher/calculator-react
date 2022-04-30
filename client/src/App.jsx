@@ -81,6 +81,17 @@ const App = () => {
   // this is passed to handle exponents as an argument
   let currentEquation = prevEquations[focus];
 
+  const toggleExponentMode = () => {
+    handleExponents(
+      currentEquation,
+      inputRef,
+      exponential,
+      setExponential,
+      clickHandler
+    );
+    console.log(exponential, "look here");
+  };
+
   // d
   // asdsadas
   // da
@@ -121,7 +132,7 @@ const App = () => {
     const { inExponentMode, exponentStart } = exponential;
 
     // check if value is an operator
-    var isOperator = ["+", "-", "*", "/", "(", ")"].some((operator) => {
+    var isOperator = ["+", "-", "*", "/"].some((operator) => {
       // trim whitespace from value in case its an operator
       return operator === value.trim();
     });
@@ -136,8 +147,6 @@ const App = () => {
         exponentStart: null,
       });
     } else if (inExponentMode && canBeExponent) {
-      console.log(value, "TRIG IN EXPONENT?");
-      ///
       value = convertToExponent(value);
       // convert the values to tiny values before adding them
     }
@@ -171,9 +180,12 @@ const App = () => {
     setPrevEquations(prevEquationsCopy);
     let newClickVal = value.length;
 
-    if (newClickVal === 5) {
+    // newClickVal of 5 is a trig function, newClickVal of two is a set of parenthesis
+    if (newClickVal === 5 || newClickVal === 2) {
+      // set cursor within the parenthesis
       setClicks(cursorIndex + newClickVal - 1);
     } else {
+      // if not trig or parenthesis, place cursor index after last entered character
       setClicks(cursorIndex + newClickVal);
     }
 
@@ -417,14 +429,7 @@ const App = () => {
         <div className="bottom-section">
           <Trig
             clickHandler={clickHandler}
-            handleExponents={() =>
-              handleExponents(
-                currentEquation,
-                inputRef,
-                exponential,
-                setExponential
-              )
-            }
+            handleExponents={() => toggleExponentMode()}
           />
           <GridCenter clickHandler={clickHandler} />
           <GridRight

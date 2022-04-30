@@ -2,7 +2,8 @@ export const handleExponents = (
   currentEquation,
   ref,
   exponential,
-  setExponential
+  setExponential,
+  clickHandler
 ) => {
   // check if app is already in exponent mode
   const { inExponentMode } = exponential;
@@ -27,8 +28,10 @@ export const handleExponents = (
   } else {
     setExponential({
       inExponentMode: true,
-      exponentStart: cursorIndex - 1,
+      // cursor index is the index where opening parenthesis will appear
+      exponentStart: cursorIndex,
     });
+    clickHandler("⁽⁾");
   }
   ref.current.focus();
 };
