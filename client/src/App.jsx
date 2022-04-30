@@ -9,6 +9,7 @@ import Options from "./components/Options";
 import Equations from "./components/Equations";
 import { calculate } from "./utils/calculate";
 import { handleExponents } from "./utils/handleExponents";
+import { convertToExponent } from "./utils/convertToExponent";
 
 const App = () => {
   const { theme } = useContext(ThemeContext);
@@ -108,11 +109,29 @@ const App = () => {
   // adasd
 
   const clickHandler = (value) => {
+    // create copy of focused equation
     let currentEquationCopy = {
       ...prevEquations[focus],
     };
 
+    // get cursor index from inputRef
     const cursorIndex = inputRef.current.selectionStart;
+
+    // get data stored in exponential state
+    const { inExponentMode, exponentStart } = exponential;
+
+    // if app is already in exponent mode, and the cursor is before the start of the exponent
+    if (inExponentMode && cursorIndex <= exponentStart) {
+      // go back to normal mode
+      setExponential({
+        inExponentMode: false,
+        exponentStart: null,
+      });
+    } else if (inExponentMode && typeof parseInt("9") === "number") {
+      ///
+      value = convertToExponent(value);
+      // convert the values to tiny values before adding them
+    }
 
     const updatedExpression =
       // the segment of expression BEFORE CURSOR POSITION
@@ -390,7 +409,12 @@ const App = () => {
           <Trig
             clickHandler={clickHandler}
             handleExponents={() =>
-              handleExponents(currentEquation, inputRef, setExponential)
+              handleExponents(
+                currentEquation,
+                inputRef,
+                exponential,
+                setExponential
+              )
             }
           />
           <GridCenter clickHandler={clickHandler} />
