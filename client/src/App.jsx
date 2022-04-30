@@ -120,6 +120,14 @@ const App = () => {
     // get data stored in exponential state
     const { inExponentMode, exponentStart } = exponential;
 
+    // check if value is an operator
+    var isOperator = ["+", "-", "*", "/", "(", ")"].some((operator) => {
+      // trim whitespace from value in case its an operator
+      return operator === value.trim();
+    });
+
+    const canBeExponent = !isNaN(value) || isOperator;
+
     // if app is already in exponent mode, and the cursor is before the start of the exponent
     if (inExponentMode && cursorIndex <= exponentStart) {
       // go back to normal mode
@@ -127,7 +135,8 @@ const App = () => {
         inExponentMode: false,
         exponentStart: null,
       });
-    } else if (inExponentMode && typeof parseInt("9") === "number") {
+    } else if (inExponentMode && canBeExponent) {
+      console.log(value, "TRIG IN EXPONENT?");
       ///
       value = convertToExponent(value);
       // convert the values to tiny values before adding them
