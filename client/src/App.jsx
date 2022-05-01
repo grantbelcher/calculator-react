@@ -692,6 +692,12 @@ const App = () => {
           carrotIndex: 0,
         },
       ]);
+
+      setExponentRanges({
+        buttonIsDisabled: false,
+        lists: [],
+      });
+
       inputRef.current.focus();
     } else {
       // set value of input to be blank
