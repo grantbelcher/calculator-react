@@ -459,6 +459,24 @@ const App = () => {
           // delete range from state
         } else if (cursorIndex === rangeEnd + 1) {
           // delete range from state
+          const exponentListPt1 = exponentRanges.lists[focus].slice(
+            0,
+            indexOfRange
+          );
+          const exponentListPt2 = exponentRanges.lists[focus].slice(
+            indexOfRange + 1
+          );
+
+          const updatedExponentRanges = [
+            ...exponentListPt1,
+            ...exponentListPt2,
+          ];
+          let listsCopy = exponentRanges.lists;
+          listsCopy[focus] = updatedExponentRanges;
+          setExponentRanges({
+            ...exponentRanges,
+            lists: listsCopy,
+          });
 
           console.log(rangeStart, rangeEnd, "delete exponent from end");
           // make a copy of the expression in focused input
