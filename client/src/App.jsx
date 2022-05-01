@@ -185,6 +185,8 @@ const App = () => {
 
   const checkExponentRanges = (cursorIndex, listOfRanges) => {
     let cursorInRange = false;
+    let indexOfRange = null;
+    let range = null;
     // find exponent ranges
     console.log(listOfRanges, "list of ranges!!!");
     for (let i = 0; i < listOfRanges.length; i++) {
@@ -195,9 +197,14 @@ const App = () => {
         cursorIndex <= listOfRanges[i][1]
       ) {
         cursorInRange = true;
+        indexOfRange = i;
       }
     }
-    return cursorInRange;
+    return {
+      cursorInRange,
+      indexOfRange,
+      range,
+    };
   };
 
   const clickHandler = (value) => {
@@ -216,7 +223,10 @@ const App = () => {
     // if a list of ranges already exists
     if (expRanges) {
       console.log(expRanges, "inside desired IF block");
-      const cursorInRange = checkExponentRanges(cursorIndex, expRanges);
+      const { cursorInRange, indexOfRange } = checkExponentRanges(
+        cursorIndex,
+        expRanges
+      );
 
       // check if value is an operator
       var isOperator = ["+", "-", "*", "/"].some((operator) => {
@@ -231,7 +241,10 @@ const App = () => {
       if (cursorInRange && canBeExponent) {
         // convert the values to tiny values before adding them
         value = convertToExponent(value);
-        // update the exponent range, end limit plus 1
+
+        // update the current exponent range's end limit by 1
+        exponentRanges.lists[focus][indexOfRange][1] =
+          exponentRanges.lists[focus][indexOfRange][1] + 1;
       } else {
         // do nothing?
         console.log(
