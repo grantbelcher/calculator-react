@@ -173,12 +173,6 @@ const App = () => {
 
   // find exponent ranges for focused equation
   const findExponentRanges = () => {
-    console.log(
-      exponentRanges.lists,
-      focus,
-      exponentRanges.lists[focus],
-      "wtffffff"
-    );
     const ranges = exponentRanges.lists[focus];
     return ranges;
   };
@@ -188,7 +182,6 @@ const App = () => {
     let indexOfRange = null;
     let range = null;
     // find exponent ranges
-    console.log(listOfRanges, "list of ranges!!!");
     for (let i = 0; i < listOfRanges.length; i++) {
       // if cursor Index is within range
       // greater than start range(cursor index), greater than or equal to end range
@@ -197,6 +190,9 @@ const App = () => {
         cursorIndex <= listOfRanges[i][1]
       ) {
         cursorInRange = true;
+        indexOfRange = i;
+      } else if (cursorIndex === listOfRanges[i][1] + 1) {
+        cursorInRange = false;
         indexOfRange = i;
       }
     }
@@ -208,7 +204,6 @@ const App = () => {
   };
 
   const clickHandler = (value) => {
-    console.log(exponentRanges.lists, exponentRanges.lists[focus], "look here");
     // create copy of focused equation
     let currentEquationCopy = {
       ...prevEquations[focus],
@@ -219,10 +214,8 @@ const App = () => {
 
     // find exponent ranges for focused equation
     const expRanges = findExponentRanges();
-    console.log(expRanges, "before IF block");
     // if a list of ranges already exists
     if (expRanges) {
-      console.log(expRanges, "inside desired IF block");
       const { cursorInRange, indexOfRange } = checkExponentRanges(
         cursorIndex,
         expRanges
@@ -238,13 +231,18 @@ const App = () => {
       const canBeExponent = !isNaN(value) || isOperator;
 
       // if cursor is in an exponent range and the character can be an exponent
-      if (cursorInRange && canBeExponent) {
-        // convert the values to tiny values before adding them
-        value = convertToExponent(value);
+      if (cursorInRange) {
+        if (canBeExponent) {
+          exponentRanges.lists[focus][indexOfRange][1] =
+            exponentRanges.lists[focus][indexOfRange][1] + 1;
+          // convert the values to tiny values before adding them
+          value = convertToExponent(value);
+        } else {
+          // input charactar cannot be entered as an exponent
+          return;
+        }
 
         // update the current exponent range's end limit by 1
-        exponentRanges.lists[focus][indexOfRange][1] =
-          exponentRanges.lists[focus][indexOfRange][1] + 1;
       } else {
         // do nothing?
         console.log(
@@ -434,6 +432,40 @@ const App = () => {
       // reset cursor index to 0 and do nothing else
       setClicks(0);
     } else {
+      // get cursor index from inputRef
+      const cursorIndex = inputRef.current.selectionStart;
+
+      // find exponent ranges for focused equation
+      const expRanges = findExponentRanges();
+
+      // if a list of ranges already exists
+      if (expRanges) {
+        console.log(expRanges, "inside desired IF block");
+        const { cursorInRange, indexOfRange } = checkExponentRanges(
+          cursorIndex,
+          expRanges
+        );
+        console.log(indexOfRange, "index OF RANGE");
+        console.log(expRanges[focus], "before it breaks");
+
+        const rangeStart = exponentRanges.lists[focus][indexOfRange][0];
+        const rangeEnd = exponentRanges.lists[focus][indexOfRange][1];
+        console.log(rangeStart, rangeEnd, "yooooooooo");
+
+        if (cursorInRange) {
+          exponentRanges.lists[focus][indexOfRange][1] =
+            exponentRanges.lists[focus][indexOfRange][1] - 1;
+        } else if (cursorIndex === rangeStart) {
+          console.log("delete exponent");
+          // delete both parenthesis
+          // delete range from state
+        } else if (cursorIndex === rangeEnd + 1) {
+          console.log("delete exponent from end");
+          // delete both parenthesis
+          // delete range from state
+        }
+      }
+
       // make a copy of the expression in focused input
       const { expression: oldExpression } = currentEquationCopy;
       // make a copy of the expression up to, but not including the index to delete
