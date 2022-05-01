@@ -417,10 +417,8 @@ const App = () => {
     inputRef.current.focus();
     inputRef.current.selectionStart = index;
   };
-
   const handleBackspace = () => {
-    let indexesToDelete = 1;
-
+    console.log("test");
     // create a copy of focused equation
     let currentEquationCopy = {
       ...prevEquations[focus],
@@ -439,9 +437,8 @@ const App = () => {
 
       // find exponent ranges for focused equation
       const expRanges = findExponentRanges();
-
       // if a list of ranges already exists
-      if (expRanges) {
+      if (expRanges && expRanges.length > 0) {
         const { cursorInRange, indexOfRange } = checkExponentRanges(
           cursorIndex,
           expRanges
@@ -452,7 +449,6 @@ const App = () => {
 
         if (cursorInRange && rangeStart + 1 === cursorIndex) {
           // delete both parenthesis
-          console.log("DESIRED IF BLOCK");
           const exponentListPt1 = exponentRanges.lists[focus].slice(
             0,
             indexOfRange
@@ -532,7 +528,7 @@ const App = () => {
             lists: listsCopy,
           });
 
-          console.log(rangeStart, rangeEnd, "delete exponent from end");
+          console.log(rangeStart, rangeEnd, "wtf?!?!?");
           // make a copy of the expression in focused input
           const { expression: oldExpression } = currentEquationCopy;
           // // make a copy of the expression up to, but not including the start of the range
@@ -620,6 +616,7 @@ const App = () => {
         }
         // DELETE NORMAL
       } else {
+        console.log("else");
         // make a copy of the expression in focused input
         const { expression: oldExpression } = currentEquationCopy;
         // make a copy of the expression up to, but not including the index to delete
