@@ -450,13 +450,27 @@ const App = () => {
         const rangeStart = exponentRanges.lists[focus][indexOfRange][0];
         const rangeEnd = exponentRanges.lists[focus][indexOfRange][1];
 
-        if (cursorInRange) {
-          exponentRanges.lists[focus][indexOfRange][1] =
-            exponentRanges.lists[focus][indexOfRange][1] - 1;
-        } else if (cursorIndex === rangeStart) {
-          console.log("delete exponent");
+        if (cursorInRange && rangeStart + 1 === cursorIndex) {
           // delete both parenthesis
-          // delete range from state
+          console.log("DESIRED IF BLOCK");
+          const exponentListPt1 = exponentRanges.lists[focus].slice(
+            0,
+            indexOfRange
+          );
+          const exponentListPt2 = exponentRanges.lists[focus].slice(
+            indexOfRange + 1
+          );
+
+          const updatedExponentRanges = [
+            ...exponentListPt1,
+            ...exponentListPt2,
+          ];
+          let listsCopy = exponentRanges.lists;
+          listsCopy[focus] = updatedExponentRanges;
+          setExponentRanges({
+            ...exponentRanges,
+            lists: listsCopy,
+          });
         } else if (cursorIndex === rangeEnd + 1) {
           // delete range from state
           const exponentListPt1 = exponentRanges.lists[focus].slice(
