@@ -21,7 +21,7 @@ const App = () => {
       expression: "",
       output: "",
       forwardRef: inputRef,
-      carrotIndex: 0,
+      exponentRanges: [],
     },
   ]);
 
@@ -32,6 +32,11 @@ const App = () => {
   const [exponential, setExponential] = useState({
     inExponentMode: false,
     exponentStart: null,
+  });
+
+  const [exponentRanges, setExponentRanges] = useState({
+    buttonIsDisabled: false,
+    lists: [],
   });
 
   useEffect(() => {
@@ -82,15 +87,62 @@ const App = () => {
   let currentEquation = prevEquations[focus];
 
   const toggleExponentMode = () => {
+    // create an array in each equations state that will store exponent ranges
+    // when exponent is toggled on, add an array of two elements, first is the start of the exponent range, second is the end of exponent range
+    // in clickHandler, check the input selection start to see if it is within one of the ranges,
+    // if in an exponent range, add the value as an exponent AND UPDATE THE END OF THE RANGE BY ONE!!!!
     handleExponents(
       currentEquation,
       inputRef,
       exponential,
       setExponential,
-      clickHandler
+      clickHandler,
+      exponentRanges,
+      setExponentRanges,
+      focus
     );
-    console.log(exponential, "look here");
   };
+
+  // const findExponentRange = (range) => {
+  //   let rangeIsPresent = false
+  //   indexOfRange = null;
+  //   // find current equation
+  //   const currentEquationCopy = prevEquations[focus];
+  //   // iterate thru exponent ranges
+  //   for (let i = 0; i < currentEquationCopy.exponentRanges.length; i++) {
+  //             // check if the opening range  or closing range is already present
+  //             let openingRangeMatch = range[0] === currentEquationCopy.exponentRanges[i][0]
+  //             let closingRangeMatch = range[1] === currentEquationCopy.exponentRanges[i][1]
+  //             // if a range is a match
+  //             if (openingRangeMatch || closingRangeMatch) {
+  //               indexOfRange = i
+  //             }
+  //         }
+  //   }
+
+  // }
+
+  // const updateExponentRanges = (range) => {
+
+  //   if (!rangeIsPresent) {
+  //     currentEquationCopy.exponentRanges.push(range)
+  //   }
+
+  //   // update Prev Equations List with updated equation
+
+  //   let copy = [...prevEquations];
+  //   let newCopyAfterIndex = copy.slice(focus + 1, copy.length);
+
+  //   let newCopyBeforeIndex = copy.slice(0, focus);
+
+  //   let prevEquationsCopy;
+  //   prevEquationsCopy = [
+  //     ...newCopyBeforeIndex,
+  //     currentEquationCopy,
+  //     ...newCopyAfterIndex,
+  //   ];
+  //   setPrevEquations(prevEquationsCopy);
+  // };
 
   // d
   // asdsadas
@@ -119,7 +171,37 @@ const App = () => {
   // dasds
   // adasd
 
+  // find exponent ranges for focused equation
+  const findExponentRanges = () => {
+    console.log(
+      exponentRanges.lists,
+      focus,
+      exponentRanges.lists[focus],
+      "wtffffff"
+    );
+    const ranges = exponentRanges.lists[focus];
+    return ranges;
+  };
+
+  const checkExponentRanges = (cursorIndex, listOfRanges) => {
+    let cursorInRange = false;
+    // find exponent ranges
+    console.log(listOfRanges, "list of ranges!!!");
+    for (let i = 0; i < listOfRanges.length; i++) {
+      // if cursor Index is within range
+      // greater than start range(cursor index), greater than or equal to end range
+      if (
+        cursorIndex > listOfRanges[i][0] &&
+        cursorIndex <= listOfRanges[i][1]
+      ) {
+        cursorInRange = true;
+      }
+    }
+    return cursorInRange;
+  };
+
   const clickHandler = (value) => {
+    console.log(exponentRanges.lists, exponentRanges.lists[focus], "look here");
     // create copy of focused equation
     let currentEquationCopy = {
       ...prevEquations[focus],
@@ -128,28 +210,37 @@ const App = () => {
     // get cursor index from inputRef
     const cursorIndex = inputRef.current.selectionStart;
 
-    // get data stored in exponential state
-    const { inExponentMode, exponentStart } = exponential;
+    // find exponent ranges for focused equation
+    const expRanges = findExponentRanges();
+    console.log(expRanges, "before IF block");
+    // if a list of ranges already exists
+    if (expRanges) {
+      console.log(expRanges, "inside desired IF block");
+      const cursorInRange = checkExponentRanges(cursorIndex, expRanges);
 
-    // check if value is an operator
-    var isOperator = ["+", "-", "*", "/"].some((operator) => {
-      // trim whitespace from value in case its an operator
-      return operator === value.trim();
-    });
-
-    const canBeExponent = !isNaN(value) || isOperator;
-
-    // if app is already in exponent mode, and the cursor is before the start of the exponent
-    if (inExponentMode && cursorIndex <= exponentStart) {
-      // go back to normal mode
-      setExponential({
-        inExponentMode: false,
-        exponentStart: null,
+      // check if value is an operator
+      var isOperator = ["+", "-", "*", "/"].some((operator) => {
+        // trim whitespace from value in case its an operator
+        return operator === value.trim();
       });
-    } else if (inExponentMode && canBeExponent) {
-      value = convertToExponent(value);
-      // convert the values to tiny values before adding them
+
+      // check if the input character can be entered as an exponent
+      const canBeExponent = !isNaN(value) || isOperator;
+
+      // if cursor is in an exponent range and the character can be an exponent
+      if (cursorInRange && canBeExponent) {
+        // convert the values to tiny values before adding them
+        value = convertToExponent(value);
+        // update the exponent range, end limit plus 1
+      } else {
+        // do nothing?
+        console.log(
+          "cursor not in range, or values cant be converted to exponents"
+        );
+      }
     }
+
+    // check if cursor index is in an exponent range of focused equation
 
     const updatedExpression =
       // the segment of expression BEFORE CURSOR POSITION
@@ -376,6 +467,7 @@ const App = () => {
       expression: "",
       output: "",
       forwardRef: inputRef,
+      exponentRanges: [],
       carrotIndex: 0,
     };
     const prevEquationsCopy = [...prevEquations];
@@ -399,6 +491,7 @@ const App = () => {
           expression: "",
           output: "",
           forwardRef: inputRef,
+          exponentRanges: [],
           carrotIndex: 0,
         },
       ]);

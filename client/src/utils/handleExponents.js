@@ -1,37 +1,87 @@
+// export const updateExponentRanges = (range) => {
+//   // find current equation
+//   console.log(prevEquations[focus]);
+//   let currentEquation = prevEquations[focus];
+
+//   // define a variable to track if range is already present
+//   let rangeIsPresent = false;
+
+//   // iterate thru exponent ranges for current equation
+//   for (let i = 0; i < currentEquation.exponentRanges.length; i++) {
+//     // if the opening range  or closing range is already present
+
+//     let openingRangeMatch = range[0] === currentEquation.exponentRanges[i][0];
+//     let closingRangeMatch = range[1] === currentEquation.exponentRanges[i][1];
+//     if (openingRangeMatch) {
+//       rangeIsPresent = true;
+//       // update opening range
+//       console.log("opening match");
+//     }
+
+//     if (closingRangeMatch) {
+//       // update closing range
+//       rangeIsPresent = true;
+//       console.log("closing match");
+//     }
+//   }
+//   // if range is not present
+//   if (!rangeIsPresent) {
+//     //  add new range to exponent range list in current equation
+//     prevEquations[focus].exponentRanges.push(range);
+//   }
+// };
+
 export const handleExponents = (
   currentEquation,
   ref,
   exponential,
   setExponential,
-  clickHandler
+  clickHandler,
+  exponentRanges,
+  setExponentRanges,
+  focusIndex
 ) => {
   // check if app is already in exponent mode
-  const { inExponentMode } = exponential;
+  // const { inExponentMode } = exponential;
   // obtain a copy of the focused equation's expression
   let { expression } = currentEquation;
   // find cursor position
   const cursorIndex = ref.current.selectionStart;
   // find the char before cursor in focused expression
   const lastChar = expression[cursorIndex - 1];
+
   // if expression is empty, or previous value is a space
-  if (
-    inExponentMode ||
-    expression.length === 0 ||
-    lastChar === " " ||
-    !lastChar
-  ) {
-    // exponent buttons are disabled
-    setExponential({
-      inExponentMode: false,
-      exponentStart: null,
+  if (expression.length === 0 || lastChar === " " || !lastChar) {
+    // exponent buttons are disabled, do nothing
+    setExponentRanges({
+      ...exponentRanges,
     });
   } else {
-    setExponential({
-      inExponentMode: true,
-      // cursor index is the index where opening parenthesis will appear
-      exponentStart: cursorIndex,
-    });
+    // make copy of ranges
+    let updatedRanges = {
+      ...exponentRanges,
+    };
+
+    // make a copy of current equation's list of ranges
+    const listOfRanges = updatedRanges.lists[focusIndex];
+    // if the equation already has an existing list of ranges
+    if (listOfRanges) {
+      // make a copy of that list and add the new range to the list copy
+      updatedRanges.lists[focusIndex] = [
+        ...updatedRanges.lists[focusIndex],
+        [cursorIndex, cursorIndex + 1],
+      ];
+      // if the equation does not have an existing list of ranges
+    } else {
+      // make a new list of equations
+      updatedRanges.lists[focusIndex] = [[cursorIndex, cursorIndex + 1]];
+    }
+
+    // add the updated list of ranges to state
+    setExponentRanges(updatedRanges);
+    // add the exponent parenthesis to equation
     clickHandler("⁽⁾");
   }
+  // refocus on equation
   ref.current.focus();
 };
