@@ -1,6 +1,7 @@
 import { evaluateNastyEquationWithPi } from "./reformatTermWithPi";
 import { reformatAllTrig } from "./reformatTrigFunction";
 import { reformatExponents } from "./reformatExponents";
+import { rootToExponent } from "./reformatNthRoot";
 import { finalReformat } from "./finalReformat";
 
 export function calculate(string) {
@@ -21,18 +22,20 @@ export function calculate(string) {
 
   // check if trig functions are present
   string = reformatAllTrig(string);
+  console.log(string, "before 1st exponent reformat");
+
+  string = rootToExponent(string);
 
   // reformat all exponents
   string = reformatExponents(string);
-
+  console.log(string, "after 1st exponent reformat");
   // string = string.replace('')
 
   string = finalReformat(string);
-  console.log(string, "before replacing exponent");
+
   // need to replace exponent operator here so that no other reformating function deletes it
   string = string.replace(/exponent/g, "**");
-
-  console.log(string, "after replacing exponent");
+  console.log(string, "after final exponent reformat");
 
   if (stringIsNaN) {
     // evaluate

@@ -297,9 +297,9 @@ const App = () => {
         // update the current exponent range's end limit by 1
       } else {
         // do nothing?
-        console.log(
-          "cursor not in range, or values cant be converted to exponents"
-        );
+        // console.log(
+        //   "cursor not in range, or values cant be converted to exponents"
+        // );
       }
     }
 
