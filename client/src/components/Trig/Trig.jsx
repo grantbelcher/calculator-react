@@ -6,6 +6,7 @@ function Trig({
   handleExponents,
   handleSecondPower,
   handleNthRoot,
+  handleSquareRoot,
 }) {
   const { theme } = useContext(ThemeContext);
   const buttonTheme = `button operation-button-${theme}`;
@@ -25,7 +26,9 @@ function Trig({
       <button className={buttonTheme} onClick={() => clickHandler("abs()")}>
         |a|
       </button>
-      <button className={buttonTheme}>√ </button>
+      <button className={buttonTheme} onClick={() => handleSquareRoot()}>
+        √{" "}
+      </button>
       <button className={buttonTheme} onClick={() => handleNthRoot()}>
         <sup>n</sup>&radic;
       </button>

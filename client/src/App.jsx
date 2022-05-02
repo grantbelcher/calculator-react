@@ -99,6 +99,17 @@ const App = () => {
     );
   };
 
+  const toggleSquareRoot = () => {
+    handleNthRoot(
+      currentEquation,
+      inputRef,
+      clickHandler,
+      exponentRanges,
+      setExponentRanges,
+      focus,
+      true
+    );
+  };
   const toggleExponentMode = (test) => {
     // create an array in each equations state that will store exponent ranges
     // when exponent is toggled on, add an array of two elements, first is the start of the exponent range, second is the end of exponent range
@@ -244,7 +255,7 @@ const App = () => {
         value = `${prevEquations[focus + 1].output}`;
       }
     }
-    console.log(value, "VALUE HERE");
+
     // create copy of focused equation
     let currentEquationCopy = {
       ...prevEquations[focus],
@@ -324,7 +335,11 @@ const App = () => {
     let newClickVal = value.length;
 
     // newClickVal of 5 is a trig function, newClickVal of two is a set of parenthesis
-    if (newClickVal === 5 || newClickVal === 2) {
+    if (newClickVal === 5 && value === "⁽⁾√()") {
+      setClicks(cursorIndex + 1);
+    } else if (value === "⁽²⁾√()") {
+      setClicks(cursorIndex + newClickVal - 1);
+    } else if (newClickVal === 5 || newClickVal === 2) {
       // set cursor within the parenthesis
       setClicks(cursorIndex + newClickVal - 1);
     } else {
@@ -868,6 +883,7 @@ const App = () => {
             handleExponents={() => toggleExponentMode()}
             handleSecondPower={() => handleSecondPower()}
             handleNthRoot={() => toggleNthRootMode()}
+            handleSquareRoot={() => toggleSquareRoot()}
           />
           <GridCenter
             clickHandler={clickHandler}
