@@ -716,6 +716,11 @@ const App = () => {
 
       inputRef.current.focus();
     } else {
+      // clear all exponent ranges for equation to be cleared
+      const exponentRangesCopy = exponentRanges;
+      const listCopy = exponentRangesCopy.lists;
+      listCopy[focus] = [];
+
       // set value of input to be blank
       keyPressHandler("");
       inputRef.current.focus();
