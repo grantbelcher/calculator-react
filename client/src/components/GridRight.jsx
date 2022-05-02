@@ -16,7 +16,7 @@ function GridRight({ returnEquation, handleBackspace, arrowHandler }) {
           <i className="material-icons">percent</i>
         </div>
         <div className={operationTheme}>
-          <sup>a</sup>/<sub>b</sub>
+          <sup>+</sup>/<sub>-</sub>
         </div>
       </div>
       <div className="right-row top">

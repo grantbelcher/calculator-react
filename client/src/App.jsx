@@ -219,6 +219,19 @@ const App = () => {
   };
 
   const clickHandler = (value) => {
+    // IF ANSWER BUTTON WAS PRESSED
+    if (value === "ans") {
+      console.log(prevEquations[focus + 1].ouput, "look here");
+      if (
+        prevEquations[focus + 1].ouput === null ||
+        prevEquations[focus + 1].ouput === undefined
+      ) {
+        value = prevEquations[focus + 1].expression;
+      } else {
+        value = `${prevEquations[focus + 1].output}`;
+      }
+    }
+    console.log(value, "VALUE HERE");
     // create copy of focused equation
     let currentEquationCopy = {
       ...prevEquations[focus],
@@ -806,6 +819,20 @@ const App = () => {
     }
   };
 
+  let ansButtonDisabled = true;
+
+  // if an equation exists above focused equation, and the output is a valid number
+  if (prevEquations[focus + 1] && !isNaN(prevEquations[focus + 1].output)) {
+    // we will enable the answer button
+    // check if prev output is empty
+    let emptyOutput = prevEquations[focus + 1].expression.trim() === "";
+    if (emptyOutput) {
+      ansButtonDisabled = true;
+    } else {
+      ansButtonDisabled = false;
+    }
+  }
+
   const containerTheme = `background-${theme}`;
   const calcTheme = `buttons-bg-${theme}`;
 
@@ -828,7 +855,10 @@ const App = () => {
             handleExponents={() => toggleExponentMode()}
             handleSecondPower={() => handleSecondPower()}
           />
-          <GridCenter clickHandler={clickHandler} />
+          <GridCenter
+            clickHandler={clickHandler}
+            disabled={ansButtonDisabled}
+          />
           <GridRight
             handleBackspace={handleBackspace}
             arrowHandler={arrowHandler}

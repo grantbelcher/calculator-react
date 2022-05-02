@@ -28,9 +28,11 @@ export function calculate(string) {
   // string = string.replace('')
 
   string = finalReformat(string);
-
+  console.log(string, "before replacing exponent");
   // need to replace exponent operator here so that no other reformating function deletes it
   string = string.replace(/exponent/g, "**");
+
+  console.log(string, "after replacing exponent");
 
   if (stringIsNaN) {
     // evaluate

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { ThemeContext } from "../context/theme";
 
-function GridCenter({ clickHandler }) {
+function GridCenter({ clickHandler, disabled }) {
   const { theme } = useContext(ThemeContext);
   const operationTheme = `button operation-button-${theme}`;
   const numberTheme = `button num-button-${theme}`;
@@ -105,7 +105,13 @@ function GridCenter({ clickHandler }) {
       >
         .
       </button>
-      <button className={operationTheme}>ans</button>
+      <button
+        disabled={disabled}
+        className={operationTheme}
+        onClick={() => clickHandler("ans")}
+      >
+        ans
+      </button>
       <button
         className={operationTheme}
         value="+"
