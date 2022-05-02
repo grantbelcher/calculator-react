@@ -86,7 +86,7 @@ const App = () => {
   // this is passed to handle exponents as an argument
   let currentEquation = prevEquations[focus];
 
-  const toggleExponentMode = () => {
+  const toggleExponentMode = (test) => {
     // create an array in each equations state that will store exponent ranges
     // when exponent is toggled on, add an array of two elements, first is the start of the exponent range, second is the end of exponent range
     // in clickHandler, check the input selection start to see if it is within one of the ranges,
@@ -99,7 +99,22 @@ const App = () => {
       clickHandler,
       exponentRanges,
       setExponentRanges,
-      focus
+      focus,
+      false
+    );
+  };
+
+  const handleSecondPower = () => {
+    handleExponents(
+      currentEquation,
+      inputRef,
+      exponential,
+      setExponential,
+      clickHandler,
+      exponentRanges,
+      setExponentRanges,
+      focus,
+      true
     );
   };
 
@@ -747,6 +762,7 @@ const App = () => {
           <Trig
             clickHandler={clickHandler}
             handleExponents={() => toggleExponentMode()}
+            handleSecondPower={() => handleSecondPower()}
           />
           <GridCenter clickHandler={clickHandler} />
           <GridRight

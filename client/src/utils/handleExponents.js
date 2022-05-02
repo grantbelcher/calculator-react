@@ -39,8 +39,10 @@ export const handleExponents = (
   clickHandler,
   exponentRanges,
   setExponentRanges,
-  focusIndex
+  focusIndex,
+  secondPower
 ) => {
+  console.log(secondPower, "second power");
   // check if app is already in exponent mode
   // const { inExponentMode } = exponential;
   // obtain a copy of the focused equation's expression
@@ -53,6 +55,7 @@ export const handleExponents = (
   // if expression is empty, or previous value is a space
   if (expression.length === 0 || lastChar === " " || !lastChar) {
     // exponent buttons are disabled, do nothing
+    console.log("DO NOTHING");
     setExponentRanges({
       ...exponentRanges,
     });
@@ -65,22 +68,42 @@ export const handleExponents = (
     // make a copy of current equation's list of ranges
     const listOfRanges = updatedRanges.lists[focusIndex];
     // if the equation already has an existing list of ranges
+    console.log(listOfRanges, "list of ranges!!!!!");
     if (listOfRanges) {
-      // make a copy of that list and add the new range to the list copy
-      updatedRanges.lists[focusIndex] = [
-        ...updatedRanges.lists[focusIndex],
-        [cursorIndex, cursorIndex + 1],
-      ];
+      if (secondPower) {
+        console.log("second power block");
+        updatedRanges.lists[focusIndex] = [
+          ...updatedRanges.lists[focusIndex],
+          [cursorIndex, cursorIndex + 2],
+        ];
+        setExponentRanges(updatedRanges);
+        clickHandler("⁽²⁾");
+      } else {
+        console.log("second power is false!!!");
+        // make a copy of that list and add the new range to the list copy
+        updatedRanges.lists[focusIndex] = [
+          ...updatedRanges.lists[focusIndex],
+          [cursorIndex, cursorIndex + 1],
+        ];
+        clickHandler("⁽⁾");
+      }
       // if the equation does not have an existing list of ranges
     } else {
       // make a new list of equations
-      updatedRanges.lists[focusIndex] = [[cursorIndex, cursorIndex + 1]];
+      if (secondPower) {
+        updatedRanges.lists[focusIndex] = [[cursorIndex, cursorIndex + 2]];
+        setExponentRanges(updatedRanges);
+        clickHandler("⁽²⁾");
+      } else {
+        updatedRanges.lists[focusIndex] = [[cursorIndex, cursorIndex + 1]];
+        setExponentRanges(updatedRanges);
+        clickHandler("⁽⁾");
+      }
     }
 
     // add the updated list of ranges to state
-    setExponentRanges(updatedRanges);
+
     // add the exponent parenthesis to equation
-    clickHandler("⁽⁾");
   }
   // refocus on equation
   ref.current.focus();

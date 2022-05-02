@@ -31,7 +31,7 @@ export function calculate(string) {
 
   // need to replace exponent operator here so that no other reformating function deletes it
   string = string.replace(/exponent/g, "**");
-  console.log(string, "string before eval");
+
   if (stringIsNaN) {
     // evaluate
     try {

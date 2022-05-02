@@ -1,15 +1,20 @@
 import React, { useContext } from "react";
 import { ThemeContext } from "../../context/theme";
 
-function Trig({ clickHandler, handleExponents }) {
+function Trig({ clickHandler, handleExponents, handleSecondPower }) {
   const { theme } = useContext(ThemeContext);
   const buttonTheme = `button operation-button-${theme}`;
+
+  const squareValue = () => {
+    clickHandler("⁽⁾");
+  };
+
   return (
     <div className="trig-functions">
-      <button className={buttonTheme} onClick={() => clickHandler("²")}>
+      <button className={buttonTheme} onClick={() => handleSecondPower()}>
         x<sup>2</sup>
       </button>
-      <button className={buttonTheme} onClick={handleExponents}>
+      <button className={buttonTheme} onClick={() => handleExponents()}>
         x<sup>b</sup>
       </button>
       <button className={buttonTheme}>|a|</button>
