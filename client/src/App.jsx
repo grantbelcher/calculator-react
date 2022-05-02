@@ -455,11 +455,7 @@ const App = () => {
       // find exponent ranges for focused equation
       const expRanges = findExponentRanges();
       // if a list of ranges already exists
-      console.log(
-        expRanges,
-        expRanges.length > 0,
-        "look here for ranges, ranges are found"
-      );
+
       if (expRanges && expRanges.length > 0) {
         // THIS IS POTENTIAL SOURCE OF BUG
         const { cursorInRange, indexOfRange } = checkExponentRanges(
@@ -474,6 +470,8 @@ const App = () => {
           exponentRanges.lists[focus]
         );
 
+        // IF EXPONENT RANGES EXIST, BUT CURSOR IS NOT IN OR ADJACENT TO AN EXPONENT RANGE
+        // PERFORM A NORMAL DELETE
         if (!cursorInRange && indexOfRange === null) {
           console.log("INSIDE NORMAL DELETE....delete normal");
           // make a copy of the expression in focused input

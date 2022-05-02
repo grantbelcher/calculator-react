@@ -23,7 +23,7 @@ function removeMultiplierAroundOperators(string) {
   // find all '+*' replace with "+"
   string = string.replace(/\+\*/g, "+");
   // find all '*-' replace with "-"
-  string = string.replace(/\*\-/g, "-");
+  // string = string.replace(/\*\-/g, "-");
   // find all '-*' replace with "-"
   string = string.replace(/\-\*/g, "-");
   // find all '**' replace with "*"
