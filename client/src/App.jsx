@@ -668,7 +668,23 @@ const App = () => {
       carrotIndex: 0,
     };
     const prevEquationsCopy = [...prevEquations];
+
     if (focus === 0) {
+      // update the index identifying of every exponent range stored in state
+      // access exp range state
+      const exponentRangesCopy = exponentRanges;
+      const { lists } = exponentRangesCopy;
+      // create a new list of exponent ranges, index 0 is a new list for the new equation that is being created
+      let newList = [[]];
+      // iterate thru lists
+      for (let i = 0; i < lists.length; i++) {
+        // push each list to the new list, this will increment the identifier index by 1 to reflect its new index in equation list
+        newList.push(lists[i]);
+      }
+      setExponentRanges({
+        ...exponentRanges,
+        lists: newList,
+      });
       setPrevEquations([resetEquation, ...prevEquationsCopy]);
     } else {
       setPrevEquations(prevEquationsCopy);
@@ -692,7 +708,7 @@ const App = () => {
           carrotIndex: 0,
         },
       ]);
-
+      // reset all exponent ranges
       setExponentRanges({
         buttonIsDisabled: false,
         lists: [],
