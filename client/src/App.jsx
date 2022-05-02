@@ -432,8 +432,8 @@ const App = () => {
     inputRef.current.focus();
     inputRef.current.selectionStart = index;
   };
+
   const handleBackspace = () => {
-    console.log("test");
     // create a copy of focused equation
     let currentEquationCopy = {
       ...prevEquations[focus],
@@ -442,154 +442,40 @@ const App = () => {
     let cursorIndex = inputRef.current.selectionStart;
     // if the cursor is at index 0 of the focused expression
     if (cursorIndex === 0) {
+      console.log("cursor at 0");
       // refocus on expression because focus was changed after button click
       inputRef.current.focus();
       // reset cursor index to 0 and do nothing else
       setClicks(0);
     } else {
+      console.log("cursor greater than 0");
       // get cursor index from inputRef
       const cursorIndex = inputRef.current.selectionStart;
 
       // find exponent ranges for focused equation
       const expRanges = findExponentRanges();
       // if a list of ranges already exists
+      console.log(
+        expRanges,
+        expRanges.length > 0,
+        "look here for ranges, ranges are found"
+      );
       if (expRanges && expRanges.length > 0) {
+        // THIS IS POTENTIAL SOURCE OF BUG
         const { cursorInRange, indexOfRange } = checkExponentRanges(
           cursorIndex,
           expRanges
         );
+        console.log(
+          cursorInRange,
+          "cursor in range",
+          indexOfRange,
+          "index of rangerange",
+          exponentRanges.lists[focus]
+        );
 
-        const rangeStart = exponentRanges.lists[focus][indexOfRange][0];
-        const rangeEnd = exponentRanges.lists[focus][indexOfRange][1];
-
-        if (cursorInRange && rangeStart + 1 === cursorIndex) {
-          // delete both parenthesis
-          const exponentListPt1 = exponentRanges.lists[focus].slice(
-            0,
-            indexOfRange
-          );
-          const exponentListPt2 = exponentRanges.lists[focus].slice(
-            indexOfRange + 1
-          );
-
-          const updatedExponentRanges = [
-            ...exponentListPt1,
-            ...exponentListPt2,
-          ];
-          let listsCopy = exponentRanges.lists;
-          listsCopy[focus] = updatedExponentRanges;
-          setExponentRanges({
-            ...exponentRanges,
-            lists: listsCopy,
-          });
-
-          // make a copy of the expression in focused input
-          const { expression: oldExpression } = currentEquationCopy;
-          // // make a copy of the expression up to, but not including the start of the range
-          const segmentBeforeCursor = oldExpression.slice(0, rangeStart);
-          // // make a copy of the expression after the index to delete
-          const segmentAfterCursor = oldExpression.slice(rangeEnd + 1);
-          // // combine two copies to update the expression, now excluding the deleted character
-          const updatedExpression = segmentBeforeCursor + segmentAfterCursor;
-          // delete both parenthesis
-          const output = calculate(updatedExpression);
-          // recalculate with the updated expression
-          // update the current equation copy with the updated expression and new output
-          currentEquationCopy = {
-            ...currentEquationCopy,
-            expression: updatedExpression,
-            output,
-          };
-          // make a copy of equation list stored in state
-          let copy = [...prevEquations];
-
-          // make a copy of eqution list up but not including the focused input,
-          let newCopyBeforeIndex = copy.slice(0, focus);
-
-          // make a copy of all equations in equation list after focused input
-          let newCopyAfterIndex = copy.slice(focus + 1, copy.length);
-
-          // combine the all copied equations and updated equation to make the updated list
-          let prevEquationsCopy;
-          prevEquationsCopy = [
-            ...newCopyBeforeIndex,
-            currentEquationCopy,
-            ...newCopyAfterIndex,
-          ];
-          // update Equation list in state
-          setPrevEquations(prevEquationsCopy);
-          // refocus on current input after focus was lost due to button click
-          inputRef.current.focus();
-          // move the cursor back one index
-          setClicks(cursorIndex - 1);
-        } else if (cursorIndex === rangeEnd + 1) {
-          // delete range from state
-          const exponentListPt1 = exponentRanges.lists[focus].slice(
-            0,
-            indexOfRange
-          );
-          const exponentListPt2 = exponentRanges.lists[focus].slice(
-            indexOfRange + 1
-          );
-
-          const updatedExponentRanges = [
-            ...exponentListPt1,
-            ...exponentListPt2,
-          ];
-          let listsCopy = exponentRanges.lists;
-          listsCopy[focus] = updatedExponentRanges;
-          setExponentRanges({
-            ...exponentRanges,
-            lists: listsCopy,
-          });
-
-          console.log(rangeStart, rangeEnd, "wtf?!?!?");
-          // make a copy of the expression in focused input
-          const { expression: oldExpression } = currentEquationCopy;
-          // // make a copy of the expression up to, but not including the start of the range
-          const segmentBeforeCursor = oldExpression.slice(0, rangeStart);
-          // // make a copy of the expression after the index to delete
-          const segmentAfterCursor = oldExpression.slice(cursorIndex);
-          // // combine two copies to update the expression, now excluding the deleted character
-          const updatedExpression = segmentBeforeCursor + segmentAfterCursor;
-          // delete both parenthesis
-          const output = calculate(updatedExpression);
-          // recalculate with the updated expression
-          // update the current equation copy with the updated expression and new output
-          currentEquationCopy = {
-            ...currentEquationCopy,
-            expression: updatedExpression,
-            output,
-          };
-          // make a copy of equation list stored in state
-          let copy = [...prevEquations];
-
-          // make a copy of eqution list up but not including the focused input,
-          let newCopyBeforeIndex = copy.slice(0, focus);
-
-          // make a copy of all equations in equation list after focused input
-          let newCopyAfterIndex = copy.slice(focus + 1, copy.length);
-
-          // combine the all copied equations and updated equation to make the updated list
-          let prevEquationsCopy;
-          prevEquationsCopy = [
-            ...newCopyBeforeIndex,
-            currentEquationCopy,
-            ...newCopyAfterIndex,
-          ];
-          // update Equation list in state
-          setPrevEquations(prevEquationsCopy);
-          // refocus on current input after focus was lost due to button click
-          inputRef.current.focus();
-          // move the cursor back one index
-          setClicks(cursorIndex - 1);
-
-          // THIS IS TO PERFORM A NORMAL BACKSPACE WITHIN AN EXPONENT
-        } else {
-          // update exponent range before deleting
-          exponentRanges.lists[focus][indexOfRange][1] =
-            exponentRanges.lists[focus][indexOfRange][1] - 1;
-
+        if (!cursorInRange && indexOfRange === null) {
+          console.log("INSIDE NORMAL DELETE....delete normal");
           // make a copy of the expression in focused input
           const { expression: oldExpression } = currentEquationCopy;
           // make a copy of the expression up to, but not including the index to delete
@@ -628,10 +514,190 @@ const App = () => {
           inputRef.current.focus();
           // move the cursor back one index
           setClicks(cursorIndex - 1);
+        } else {
+          const rangeStart = exponentRanges.lists[focus][indexOfRange][0];
+          const rangeEnd = exponentRanges.lists[focus][indexOfRange][1];
+
+          // console.log(rangeStart, "range start", rangeEnd, "range end");
+
+          if (cursorInRange && rangeStart + 1 === cursorIndex) {
+            console.log(
+              "BEFORE OPENING PARENTHESIS....delete both parenthesis"
+            );
+            // delete both parenthesis
+            const exponentListPt1 = exponentRanges.lists[focus].slice(
+              0,
+              indexOfRange
+            );
+            const exponentListPt2 = exponentRanges.lists[focus].slice(
+              indexOfRange + 1
+            );
+
+            const updatedExponentRanges = [
+              ...exponentListPt1,
+              ...exponentListPt2,
+            ];
+            let listsCopy = exponentRanges.lists;
+            listsCopy[focus] = updatedExponentRanges;
+            setExponentRanges({
+              ...exponentRanges,
+              lists: listsCopy,
+            });
+
+            // make a copy of the expression in focused input
+            const { expression: oldExpression } = currentEquationCopy;
+            // // make a copy of the expression up to, but not including the start of the range
+            const segmentBeforeCursor = oldExpression.slice(0, rangeStart);
+            // // make a copy of the expression after the index to delete
+            const segmentAfterCursor = oldExpression.slice(rangeEnd + 1);
+            // // combine two copies to update the expression, now excluding the deleted character
+            const updatedExpression = segmentBeforeCursor + segmentAfterCursor;
+            // delete both parenthesis
+            const output = calculate(updatedExpression);
+            // recalculate with the updated expression
+            // update the current equation copy with the updated expression and new output
+            currentEquationCopy = {
+              ...currentEquationCopy,
+              expression: updatedExpression,
+              output,
+            };
+            // make a copy of equation list stored in state
+            let copy = [...prevEquations];
+
+            // make a copy of eqution list up but not including the focused input,
+            let newCopyBeforeIndex = copy.slice(0, focus);
+
+            // make a copy of all equations in equation list after focused input
+            let newCopyAfterIndex = copy.slice(focus + 1, copy.length);
+
+            // combine the all copied equations and updated equation to make the updated list
+            let prevEquationsCopy;
+            prevEquationsCopy = [
+              ...newCopyBeforeIndex,
+              currentEquationCopy,
+              ...newCopyAfterIndex,
+            ];
+            // update Equation list in state
+            setPrevEquations(prevEquationsCopy);
+            // refocus on current input after focus was lost due to button click
+            inputRef.current.focus();
+            // move the cursor back one index
+            setClicks(cursorIndex - 1);
+          } else if (cursorIndex === rangeEnd + 1) {
+            console.log(
+              "BEFORE closing PARENTHESIS....delete both parenthesis"
+            );
+            // delete range from state
+            const exponentListPt1 = exponentRanges.lists[focus].slice(
+              0,
+              indexOfRange
+            );
+            const exponentListPt2 = exponentRanges.lists[focus].slice(
+              indexOfRange + 1
+            );
+
+            const updatedExponentRanges = [
+              ...exponentListPt1,
+              ...exponentListPt2,
+            ];
+            let listsCopy = exponentRanges.lists;
+            listsCopy[focus] = updatedExponentRanges;
+            setExponentRanges({
+              ...exponentRanges,
+              lists: listsCopy,
+            });
+
+            console.log(rangeStart, rangeEnd, "wtf?!?!?");
+            // make a copy of the expression in focused input
+            const { expression: oldExpression } = currentEquationCopy;
+            // // make a copy of the expression up to, but not including the start of the range
+            const segmentBeforeCursor = oldExpression.slice(0, rangeStart);
+            // // make a copy of the expression after the index to delete
+            const segmentAfterCursor = oldExpression.slice(cursorIndex);
+            // // combine two copies to update the expression, now excluding the deleted character
+            const updatedExpression = segmentBeforeCursor + segmentAfterCursor;
+            // delete both parenthesis
+            const output = calculate(updatedExpression);
+            // recalculate with the updated expression
+            // update the current equation copy with the updated expression and new output
+            currentEquationCopy = {
+              ...currentEquationCopy,
+              expression: updatedExpression,
+              output,
+            };
+            // make a copy of equation list stored in state
+            let copy = [...prevEquations];
+
+            // make a copy of eqution list up but not including the focused input,
+            let newCopyBeforeIndex = copy.slice(0, focus);
+
+            // make a copy of all equations in equation list after focused input
+            let newCopyAfterIndex = copy.slice(focus + 1, copy.length);
+
+            // combine the all copied equations and updated equation to make the updated list
+            let prevEquationsCopy;
+            prevEquationsCopy = [
+              ...newCopyBeforeIndex,
+              currentEquationCopy,
+              ...newCopyAfterIndex,
+            ];
+            // update Equation list in state
+            setPrevEquations(prevEquationsCopy);
+            // refocus on current input after focus was lost due to button click
+            inputRef.current.focus();
+            // move the cursor back one index
+            setClicks(cursorIndex - 1);
+
+            // THIS IS TO PERFORM A NORMAL BACKSPACE WITHIN AN EXPONENT
+          } else {
+            console.log("INSIDE PARENTHESIS....delete both parenthesis");
+            // update exponent range before deleting
+            exponentRanges.lists[focus][indexOfRange][1] =
+              exponentRanges.lists[focus][indexOfRange][1] - 1;
+
+            // make a copy of the expression in focused input
+            const { expression: oldExpression } = currentEquationCopy;
+            // make a copy of the expression up to, but not including the index to delete
+            const segmentBeforeCursor = oldExpression.slice(0, cursorIndex - 1);
+            // make a copy of the expression after the index to delete
+            const segmentAfterCursor = oldExpression.slice(cursorIndex);
+            // combine two copies to update the expression, now excluding the deleted character
+            const updatedExpression = segmentBeforeCursor + segmentAfterCursor;
+            const output = calculate(updatedExpression);
+            // recalculate with the updated expression
+            // update the current equation copy with the updated expression and new output
+            currentEquationCopy = {
+              ...currentEquationCopy,
+              expression: updatedExpression,
+              output,
+            };
+            // make a copy of equation list stored in state
+            let copy = [...prevEquations];
+
+            // make a copy of eqution list up but not including the focused input,
+            let newCopyBeforeIndex = copy.slice(0, focus);
+
+            // make a copy of all equations in equation list after focused input
+            let newCopyAfterIndex = copy.slice(focus + 1, copy.length);
+
+            // combine the all copied equations and updated equation to make the updated list
+            let prevEquationsCopy;
+            prevEquationsCopy = [
+              ...newCopyBeforeIndex,
+              currentEquationCopy,
+              ...newCopyAfterIndex,
+            ];
+            // update Equation list in state
+            setPrevEquations(prevEquationsCopy);
+            // refocus on current input after focus was lost due to button click
+            inputRef.current.focus();
+            // move the cursor back one index
+            setClicks(cursorIndex - 1);
+          }
         }
         // DELETE NORMAL
       } else {
-        console.log("else");
+        console.log("INSIDE NORMAL DELETE....delete normal");
         // make a copy of the expression in focused input
         const { expression: oldExpression } = currentEquationCopy;
         // make a copy of the expression up to, but not including the index to delete
