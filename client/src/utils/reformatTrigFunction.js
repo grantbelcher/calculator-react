@@ -2,6 +2,7 @@ function trigFunctionPresent(expression) {
   if (expression.search("sin") >= 0) return true;
   if (expression.search("cos") >= 0) return true;
   if (expression.search("tan") >= 0) return true;
+  if (expression.search("abs") >= 0) return true;
   return false;
 }
 
@@ -14,11 +15,15 @@ function reformatCos(expression) {
 function reformatTan(expression) {
   return expression.replace(/tan/g, `*Math.tan`);
 }
+function reformatAbs(expression) {
+  return expression.replace(/abs/g, `*Math.abs`);
+}
 
 function reformatTrigFuncs(string) {
   let newString = reformatSin(string);
   newString = reformatCos(newString);
   newString = reformatTan(newString);
+  newString = reformatAbs(newString);
   return newString;
 }
 

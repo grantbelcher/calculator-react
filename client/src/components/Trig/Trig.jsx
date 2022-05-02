@@ -17,7 +17,9 @@ function Trig({ clickHandler, handleExponents, handleSecondPower }) {
       <button className={buttonTheme} onClick={() => handleExponents()}>
         x<sup>b</sup>
       </button>
-      <button className={buttonTheme}>|a|</button>
+      <button className={buttonTheme} onClick={() => clickHandler("abs()")}>
+        |a|
+      </button>
       <button className={buttonTheme}>√ </button>
       <button className={buttonTheme}>
         <sup>n</sup>&radic;
