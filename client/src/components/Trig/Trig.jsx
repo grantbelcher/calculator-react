@@ -1,7 +1,12 @@
 import React, { useContext } from "react";
 import { ThemeContext } from "../../context/theme";
 
-function Trig({ clickHandler, handleExponents, handleSecondPower }) {
+function Trig({
+  clickHandler,
+  handleExponents,
+  handleSecondPower,
+  handleNthRoot,
+}) {
   const { theme } = useContext(ThemeContext);
   const buttonTheme = `button operation-button-${theme}`;
 
@@ -21,7 +26,7 @@ function Trig({ clickHandler, handleExponents, handleSecondPower }) {
         |a|
       </button>
       <button className={buttonTheme}>√ </button>
-      <button className={buttonTheme}>
+      <button className={buttonTheme} onClick={() => handleNthRoot()}>
         <sup>n</sup>&radic;
       </button>
       <button

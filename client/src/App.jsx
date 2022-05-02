@@ -9,6 +9,7 @@ import Options from "./components/Options";
 import Equations from "./components/Equations";
 import { calculate } from "./utils/calculate";
 import { handleExponents } from "./utils/handleExponents";
+import { handleNthRoot } from "./utils/handleNthRoot";
 import { convertToExponent } from "./utils/convertToExponent";
 
 const App = () => {
@@ -85,6 +86,18 @@ const App = () => {
 
   // this is passed to handle exponents as an argument
   let currentEquation = prevEquations[focus];
+
+  const toggleNthRootMode = () => {
+    handleNthRoot(
+      currentEquation,
+      inputRef,
+      clickHandler,
+      exponentRanges,
+      setExponentRanges,
+      focus,
+      false
+    );
+  };
 
   const toggleExponentMode = (test) => {
     // create an array in each equations state that will store exponent ranges
@@ -854,6 +867,7 @@ const App = () => {
             clickHandler={clickHandler}
             handleExponents={() => toggleExponentMode()}
             handleSecondPower={() => handleSecondPower()}
+            handleNthRoot={() => toggleNthRootMode()}
           />
           <GridCenter
             clickHandler={clickHandler}
